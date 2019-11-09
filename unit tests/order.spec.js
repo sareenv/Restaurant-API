@@ -10,7 +10,7 @@ describe('insert', () => {
 
 	beforeAll(async() => {
 		connection = await MongoClient.connect(global.__MONGO_URI__, {
-			useNewUrlParser: true,
+			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
 		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
