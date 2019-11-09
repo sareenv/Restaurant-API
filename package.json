@@ -1,0 +1,36 @@
+{
+  "name": "340ct",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "linter": "node_modules/.bin/eslint .",
+    "unit": "./node_modules/.bin/jest --coverage 'unit tests/'"
+  },
+  "repository": {
+    "start": "node index.js",
+    "jsdoc": "node_modules/.bin/jsdoc -c jsdoc.conf",
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/340CT-1920SEPJAN/340CT-Coursework-7651331.git"
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/jest-test.config.js"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "markdownlint": "^0.17.2"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.1",
+    "mongodb": "^3.3.3"
+  }
+}
