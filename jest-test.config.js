@@ -4,6 +4,8 @@ module.exports = {
 	displayName: 'test',
 	verbose: true,
 	collectCoverage: true,
+	"preset": "@shelf/jest-mongodb",
+	
 	coverageThreshold: {
 		global: {
 			branches: 0,
