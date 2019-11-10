@@ -74,7 +74,7 @@ describe('check registration details', () => {
 	test('correct details', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
-		await expect(staff.registration('jkl', 'BXWT3979-db', 'Vinney', 'Waiting Staff Member')).toBe(true)
+		await expect(staff.registration('jkl', 'BXWT3979-db', 'Vinney', 'Waiting Staff Member')).resolves.toBe(true)
 		done()
 	})
 

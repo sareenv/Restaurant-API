@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+
 'use strict'
 
 const bcrypt = require('bcrypt-promise')
@@ -24,6 +25,19 @@ class Staff {
 			return true
 		}catch(error) {
 			throw Error()
+		}
+	}
+
+	async login(username, password) {
+		if(username === undefined || password === undefined) throw Error('Missing details')
+		const user = await this.collection.findOne({username})
+		if(user === null) throw Error('No user found')
+		try{
+			const result = await bcrypt.compare(password, user.hashedPassword)
+			console.log(result)
+			return result
+		}catch(error) {
+			throw Error(error)
 		}
 	}
 }
