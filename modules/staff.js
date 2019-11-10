@@ -3,6 +3,7 @@
 
 const bcrypt = require('bcrypt-promise')
 const hashRounds = 10
+const minPasswordLength = 5
 
 class Staff {
 	constructor(database) {
@@ -10,10 +11,11 @@ class Staff {
 		this.collection = this.database.collection('Staff')
 	}
 
-	async registration(username, password, name) {
-		const minPasswordLength = 5
-		if(username === undefined || password === undefined || name === undefined) throw Error()
+	async registration(username, password, name, memberType) {
+		const memberTypes = ['Waiting Staff Member', 'Kitchen Staff Member']
+		if(username === undefined || password === undefined || name === undefined) throw Error('missing details')
 		if(password.length < minPasswordLength) throw Error('Password is short')
+		if(memberTypes.indexOf(memberType) === -1) throw Error('Invalid member type')
 		const existingUser = await this.collection.findOne({username})
 		if(existingUser !== null) throw Error('username already exist')
 		try{

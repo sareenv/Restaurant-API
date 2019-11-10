@@ -6,7 +6,8 @@ const staticDir = require('koa-static')
 
 const orderRouter = require('./routes/order')
 const orderViewRouter = require('./routes/order-views')
-const registerViewRouter = require('./routes/register-view')
+const authRouter = require('./routes/auth')
+const authViewRouter = require('./routes/auth-view')
 
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
@@ -19,6 +20,7 @@ app.use(staticDir('public'))
 
 app.use(orderViewRouter.routes())
 app.use(orderRouter.routes())
-app.use(registerViewRouter.routes())
+app.use(authRouter.routes())
+app.use(authViewRouter.routes())
 
 app.listen(port)

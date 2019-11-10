@@ -2,17 +2,35 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Create an Account</title>
-		<meta name="description" content="form to add new books">
-		<meta name="author" content="Mark Tyers">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Staff Account</title>
+		<meta name="description" content="form to register new staff members">
+		<meta name="author" content="Vinayak Sareen">
+		<link rel="stylesheet" href="register.css">
 	</head>
 	<body>
-		<h1>Create an Staff Account</h1>
-		<form action="/register" enctype="multipart/form-data" method="post">
-			<p>Username:<br /><input type="text" name="user" placeholder="Enter the username" value=""></p>
-            <p>Password:<br /><input type="password" name="pass" placeholder="Enter the password" value=""></p>
-			<p> Staff Name: <br /><input type="text" name="name" placeholder="Enter the staff name">
-			<p><input type="submit" value="Create"></p>
-		</form>
+		<div class="registerationForm">
+		<center>
+		{{#if error}}
+			<div class="error">
+				<h4> {{error}} </h4>
+			</div>
+		{{/if}}
+
+		<h1>STAFF REGISTRATION</h1>
+		<h3>Resturant Ordering System</h3>
+			<form action="/register" enctype="multipart/form-data" method="post">
+				<p><br /><input class="textField" type="text" name="username" placeholder="Enter the username" value=""> </p>
+				<p><br /><input class="textField" type="password" name="password" placeholder="Enter the  password" value=""></p>
+				<p> <br /><input class="textField" type="text" name="name" placeholder="Enter the staff member name"> </p>
+				<select id="staffType" name="memberType">
+					<option>Waiting Staff Member</option>
+					<option>Kitchen Staff Member</option>
+				</select>
+				<p><input class="submitInput" type="submit" value="Register"></p>
+			</form>
+			<br /> Already have staff account <a href="#"> Click here</a> to Login 
+		</center>
+		</div>
 	</body>
 </html>
