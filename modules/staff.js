@@ -20,7 +20,7 @@ class Staff {
 		if(existingUser !== null) throw Error('username already exist')
 		try{
 			const hashedPassword = await bcrypt.hash(password, hashRounds)
-			await this.collection.insertOne({username, hashedPassword, name})
+			await this.collection.insertOne({username, hashedPassword, name, memberType})
 			return true
 		}catch(error) {
 			throw Error()
