@@ -4,7 +4,7 @@
 const {MongoClient} = require('mongodb')
 const Order = require('../modules/order')
 
-describe('insert', () => {
+describe('new orders', () => {
 	let connection
 	let db
 

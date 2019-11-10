@@ -10,14 +10,13 @@ class Order {
 		if (orderedItems === undefined) throw new Error('missing orderedItems')
 		if(isNaN(parseInt(tablenumber))) throw new Error('Invalid type for table number')
 		try {
-			// eslint-disable-next-line max-len
-			await this.database.collection('Orders').insertOne({tablenumber: tablenumber, orderedItems: orderedItems, pending: true})
+			const orderDetails = {tablenumber: tablenumber, orderedItems: orderedItems, pending: true}
+			await this.database.collection('Orders').insertOne(orderDetails)
 			return true
 		}catch(error) {
 			throw error
 		}
 	}
-
 }
 
 module.exports = Order
