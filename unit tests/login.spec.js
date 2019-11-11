@@ -13,7 +13,7 @@ describe('check registration details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		const details = {username: 'josh', password: 'BXWT3456-db', name: 'vinney', memberType: 'Waiting Staff Member'}
+		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
 		await db.collection('Staff').insertOne(details)
 	})
 
@@ -49,7 +49,7 @@ describe('check registration details', () => {
 	test('password not matched', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
-		const operation = staff.login('josh', 'BXfT3456-db')
+		const operation = staff.login('josh', 'sample-db')
 		await expect(operation).resolves.toBe(false)
 		done()
 	})

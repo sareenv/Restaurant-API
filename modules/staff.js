@@ -34,7 +34,6 @@ class Staff {
 		if(user === null) throw Error('No user found')
 		try{
 			const result = await bcrypt.compare(password, user.hashedPassword)
-			console.log(result)
 			return result
 		}catch(error) {
 			throw Error(error)

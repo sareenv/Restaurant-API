@@ -13,8 +13,8 @@ describe('check registration details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		const details = {username: 'josh', password: 'BXWT3456-db', name: 'vinney', memberType: 'Waiting Staff Member'}
-		await db.collection('Staff').insertOne(details)
+		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(d)
 	})
 
 	afterAll(async() => {

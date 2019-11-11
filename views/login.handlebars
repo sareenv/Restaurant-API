@@ -11,14 +11,21 @@
     <body>
         <div class="registerationForm">
             <center>
+
+            {{#if error}}
+                <div class="error">
+                    <h4> {{error}} <h4>
+                </div>
+            {{/if}}
+
             <h1>STAFF LOGIN</h1>
             <h3>Resturant Ordering System</h3>
-                <form action="/register" enctype="multipart/form-data" method="post">
+                <form action="/login" enctype="multipart/form-data" method="post">
                     <p><br /><input class="textField" type="text" name="username" placeholder="Enter the username" value=""> </p>
                     <p><br /><input class="textField" type="password" name="password" placeholder="Enter the  password" value=""></p>
                     <p><input class="submitInput" type="submit" value="Login"></p>
                 </form>
-                <br /> Don't have staff account ? <a href="#"> Click here</a> to register with us
+                <br /> Don't have staff account ? <a href="http://localhost:8080/"> Click here</a> to register with us
             </center>
 		</div>
     </body>
