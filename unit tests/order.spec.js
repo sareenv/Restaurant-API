@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 'use strict'
 
 const {MongoClient} = require('mongodb')
@@ -44,16 +44,7 @@ describe('new orders', () => {
 	test('Invalid table number type', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		await expect(order.orderRegistration('sample12', 'Chicken Tikka')).rejects.toThrow( Error('Invalid type for table number') )
+		await expect(order.orderRegistration('sam', 'Chicken Tikka')).rejects.toThrow( Error('Invalid table number') )
 		done()
 	})
-
-	test('Invalid menu items', async done => {
-		expect.assertions(1)
-		const itemName = 'Humus'
-		const result = await db.collection('Menu').findOne({name: itemName})
-		expect(result).toBeNull()
-		done()
-	})
-
 })

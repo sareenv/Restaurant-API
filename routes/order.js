@@ -12,8 +12,11 @@ router.post('/order', koaBody, async ctx => {
 	const {tablenumber, orderedItems} = ctx.request.body
 	const order = new Order(store.database)
 	try{
-		await order.orderRegistration(tablenumber, orderedItems)
-		await ctx.redirect('/registerOrder')
+		const orderResult = await order.orderRegistration(tablenumber, orderedItems)
+		if(orderResult === true) {
+			return ctx.body = true
+		}
+		return ctx.body = false
 	}catch(error) {
 		ctx.throw(badRequestHttpCode, 'Failed to save this operation')
 	}
