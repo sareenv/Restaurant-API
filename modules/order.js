@@ -18,6 +18,11 @@ class Order {
 			throw error
 		}
 	}
+
+	async pendingOrders() {
+		const pendingOrders = await this.collection.find({}).toArray()
+		return pendingOrders
+	}
 }
 
 module.exports = Order

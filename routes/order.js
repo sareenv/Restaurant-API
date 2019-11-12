@@ -23,4 +23,10 @@ router.post('/order', koaBody, async ctx => {
 	}
 })
 
+router.get('/pendingOrders', async ctx => {
+	const order = new Order(ordersDb.database)
+	const pendingOders = await order.pendingOrders()
+	await ctx.render('pendingOrders', {pendingOrders: pendingOders})
+})
+
 module.exports = router

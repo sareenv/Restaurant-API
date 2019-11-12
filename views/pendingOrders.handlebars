@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pending Orders</title>
+    <link rel="stylesheet" href="pendingOrders.css">
+</head>
+<body>
+    <h2> <center> Pending Orders </center> </h2>
+    {{#each pendingOrders}}
+        <center>
+            <div class= "pendingOrders">
+                <li style="list-style-type: none; color: white"> 
+                    <h3> Table Number {{this.tablenumber}} </h3>
+                    <p> Ordered Items {{this.orderedItems}} </p>
+                </li>
+            </div>
+        </center>
+    {{/each}}
+    
+</body>
+</html>
