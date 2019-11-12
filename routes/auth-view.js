@@ -3,12 +3,13 @@
 const Router = require('koa-router')
 const router = new Router()
 
+
 router.get('/', async ctx => {
-	await ctx.render('register')
+	await ctx.render('login')
 })
 
-router.get('/login', async ctx => {
-	await ctx.render('login')
+router.get('/register', async ctx => {
+	await ctx.render('register')
 })
 
 router.get('/welcome', async ctx => {
