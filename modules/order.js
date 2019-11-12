@@ -19,8 +19,9 @@ class Order {
 		}
 	}
 
-	async pendingOrders() {
+	async pendingOrders(accessType) {
 		try{
+			if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
 			const pendingOrders = await this.collection.find({pending: true}).toArray()
 			return pendingOrders
 		}catch(error) {

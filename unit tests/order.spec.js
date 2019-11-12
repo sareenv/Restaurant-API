@@ -48,3 +48,29 @@ describe('new orders', () => {
 		done()
 	})
 })
+
+describe('pending orders', () => {
+	let connection
+	let db
+
+	beforeAll(async() => {
+		connection = await MongoClient.connect(global.__MONGO_URI__, {
+			useUnifiedTopology: true,
+		})
+		db = await connection.db(global.__MONGO_DB_NAME__)
+		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
+		await db.collection('Menu').insertMany(mockMenuItems)
+	})
+
+	afterAll(async() => {
+		await connection.close()
+		await db.close()
+	})
+
+	test('invalid memberType', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		await expect(order.pendingOrders('Staff')).rejects.toThrow(Error())
+		done()
+	})
+})
