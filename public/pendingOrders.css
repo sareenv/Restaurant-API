@@ -1,7 +1,20 @@
 .pendingOrders{
-    background-color: green;
+    background-color: white;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 35%;
+    width: 300px;
     margin-bottom: 10px;
+}
+
+.pendingOrders li a{
+    padding: 7px;
+    
+    height: 40px;
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+}
+
+body{
+    background-color: #cecece;
 }

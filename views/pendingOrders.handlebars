@@ -12,13 +12,13 @@
     {{#each pendingOrders}}
         <center>
             <div class= "pendingOrders">
-                <li style="list-style-type: none; color: white"> 
+                <li style="list-style-type: none; color: black"> 
                     <h3> Table Number {{this.tablenumber}} </h3>
-                    <p> Ordered Items {{this.orderedItems}} </p>
+                    <h4> Ordered Items </h4> <p> {{this.orderedItems}} </p>
+                    <a href="/#"> Ready for Collection </a>
                 </li>
             </div>
         </center>
     {{/each}}
-    
 </body>
 </html>

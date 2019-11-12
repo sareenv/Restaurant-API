@@ -20,8 +20,12 @@ class Order {
 	}
 
 	async pendingOrders() {
-		const pendingOrders = await this.collection.find({}).toArray()
-		return pendingOrders
+		try{
+			const pendingOrders = await this.collection.find({pending: true}).toArray()
+			return pendingOrders
+		}catch(error) {
+			throw Error()
+		}
 	}
 }
 
