@@ -28,6 +28,17 @@ class Order {
 			throw Error()
 		}
 	}
+
+	async collectionReadyOrders(id, accessType) {
+		if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
+		if(id === undefined || id.length < 1) throw new Error('id cannot be null')
+		const order = await this.collection.findOne({_id: id})
+		if (order !== null) {
+			await order.updateOne({_id: id}, {$set: {pending: false}})
+			return true
+		}
+		return false
+	}
 }
 
 module.exports = Order
