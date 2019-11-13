@@ -9,8 +9,9 @@ const minPasswordLength = 5
 class Staff {
 	constructor(database) {
 		this.database = database
-		this.collection = this.database.collection('Staff')
+		this.collection = database.collection('Staff')
 	}
+
 
 	async registration(username, password, name, memberType) {
 		const memberTypes = ['Waiting Staff Member', 'Kitchen Staff Member']
@@ -39,6 +40,14 @@ class Staff {
 			throw Error(error)
 		}
 	}
+
+	async checkStaffStatus(username) {
+		if(username.length === 0 || username.length === undefined) throw new Error('missing username')
+		const member = await this.collection.findOne({username})
+		if (member === null) throw new Error('No staff member')
+		return member.memberType
+	}
+
 }
 
 module.exports = Staff

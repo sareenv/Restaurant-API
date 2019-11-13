@@ -8,7 +8,14 @@ const app = new Koa()
 const orderRouter = require('../routes/order')
 const orderViewRouter = require('../routes/order-views')
 
+<<<<<<< HEAD:service/order.js
 const defaultPort = 8989
+=======
+const authRouter = require('./routes/auth')
+
+
+const defaultPort = 8888
+>>>>>>> feature/authentication:index.js
 const port = process.env.PORT || defaultPort
 
 const views = require('koa-views')
@@ -18,7 +25,11 @@ app.use(session(app))
 app.use(views(`${__dirname}/../views`, { extension: 'handlebars' }, {map: { handlebars: 'handlebars' }}))
 app.use(staticDir('public'))
 
+<<<<<<< HEAD:service/order.js
 app.use(orderRouter.routes())
 app.use(orderViewRouter.routes())
 
+=======
+app.use(authRouter.routes())
+>>>>>>> feature/authentication:index.js
 app.listen(port)
