@@ -6,16 +6,20 @@
         <title>Error</title>
 		<meta name="description" content="form to register new staff members">
 		<meta name="author" content="Vinayak Sareen">
-        <link rel="stylesheet" href="register.css">
+        
     </head>
     <body>
-        <div>
-            <center>
+        <center>
+        <div class="Container">
             <h4 style="color:red;"> Error </h4>
                 {{#if error}}
                     <h3> {{error}} <h3>                  
                 {{/if}}
-            </center>
+
+                {{#if login}}
+                    <a style="padding-top: 10px; padding-bottom: 10px;" href="http://localhost:8888/"> Click to login first </a>
+                {{/if}}
 		</div>
+        </center>
     </body>
 </html>

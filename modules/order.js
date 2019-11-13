@@ -20,21 +20,22 @@ class Order {
 	}
 
 	async pendingOrders(accessType) {
+		if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
 		try{
-			if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
 			const pendingOrders = await this.collection.find({pending: true}).toArray()
 			return pendingOrders
 		}catch(error) {
+			console.log(error)
 			throw Error()
 		}
 	}
 
-	async collectionReadyOrders(id, accessType) {
-		if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
-		if(id === undefined || id.length < 1) throw new Error('id cannot be null')
-		const order = await this.collection.findOne({_id: id})
+	async collectionReadyOrders(orderId, accessType) {
+		if(accessType !== 'Kitchen Staff Member') throw new Error('Only, Kitch staff can call for collection')
+		if(orderId === undefined || orderId.length < 1) throw new Error('id cannot be null')
+		const order = await this.collection.findOne({_id: orderId})
 		if (order !== null) {
-			await order.updateOne({_id: id}, {$set: {pending: false}})
+			await order.updateOne({_id: orderId}, {$set: {pending: false}})
 			return true
 		}
 		return false

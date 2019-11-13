@@ -12,11 +12,13 @@
     {{#each pendingOrders}}
         <center>
             <div class= "pendingOrders">
-                <li style="list-style-type: none; color: black"> 
-                    <h3> Table Number {{this.tablenumber}} </h3>
-                    <h4> Ordered Items </h4> <p> {{this.orderedItems}} </p>
-                    <a href="/#"> Ready for Collection </a>
-                </li>
+                <form action="/orderCollection", method="POST" enctype="multipart/form-data">
+                    <li style="list-style-type: none; color: black"> 
+                        <h3> Table Number {{this.tablenumber}} </h3>
+                        <h4> Ordered Items </h4> <p> {{this.orderedItems}} </p>
+                        <button> Ready for Collection </button>
+                    </li>
+                </form>
             </div>
         </center>
     {{/each}}

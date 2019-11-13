@@ -25,8 +25,28 @@ router.post('/order', koaBody, async ctx => {
 
 router.get('/pendingOrders', async ctx => {
 	const order = new Order(ordersDb.database)
-	const pendingOders = await order.pendingOrders()
-	await ctx.render('pendingOrders', {pendingOrders: pendingOders})
+	try{
+		const pendingOders = await order.pendingOrders('Kitchen Staff Member')
+		await ctx.render('pendingOrders', {pendingOrders: pendingOders})
+	}catch(error) {
+		await ctx.render('error', {error: 'Cannot Access this resource'})
+	}
+})
+
+router.post('/orderCollection', koaBody, async ctx => {
+	const orderId = ctx.request.body.orderId
+	const accessType = 'Kitchen Staff Member'
+	const order = new Order(ordersDb.database)
+	try{
+		const result = await order.collectionReadyOrders(orderId, accessType)
+		if(result === true) {
+			return ctx.redirect('/pendingOrders')
+		}
+		return ctx.redirect('error', {error: 'Order collection call failed'})
+	}catch(error) {
+		console.log(error)
+		return ctx.redirect('error', {error: error})
+	}
 })
 
 module.exports = router

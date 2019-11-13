@@ -6,7 +6,7 @@
     margin-bottom: 10px;
 }
 
-.pendingOrders li a{
+.pendingOrders li button{
     padding: 7px;
     
     height: 40px;

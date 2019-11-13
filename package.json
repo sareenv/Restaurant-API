@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "linter": "node_modules/.bin/eslint .",
-    "unit": "./node_modules/.bin/jest --coverage 'unit tests/'"
+    "unit": "./node_modules/.bin/jest --coverage 'unit tests/'",
+    "test": "jest --coverage"
   },
   "repository": {
     "start": "node index.js",

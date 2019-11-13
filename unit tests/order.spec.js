@@ -58,8 +58,8 @@ describe('pending orders', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
-		await db.collection('Menu').insertMany(mockMenuItems)
+		const mockOrders = [ {pending: true, id: 1234, orderedItem: 'Fish'} ]
+		await db.collection('Orders').insertMany(mockOrders)
 	})
 
 	afterAll(async() => {
@@ -70,7 +70,16 @@ describe('pending orders', () => {
 	test('invalid memberType', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		await expect(order.pendingOrders('Staff')).rejects.toThrow(Error())
+		await expect(order.pendingOrders('Staff')).rejects.toThrow(Error('only kitchen member can see pending orders'))
 		done()
 	})
+
+	test('Invalid Authority', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.collectionReadyOrders(123, 'Waiting Staff')
+		await expect(operation).rejects.toThrow(Error('Only, Kitch staff can call for collection'))
+		done()
+	})
+
 })
