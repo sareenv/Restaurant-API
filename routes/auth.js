@@ -1,6 +1,7 @@
 'use strict'
 
 const Router = require('koa-router')
+const jwt = require('jsonwebtoken')
 const koaBody = require('koa-body')({multipart: true, uploadDir: '.'})
 const router = new Router()
 
@@ -13,7 +14,7 @@ router.post('/register', koaBody, async ctx => {
 	const staff = new Staff(store.database)
 	try{
 		await staff.registration(username, password, name, memberType)
-		ctx.redirect('/login')
+		return ctx.redirect('/')
 	}catch(error) {
 		await ctx.render('register', {error: error})
 	}
@@ -27,9 +28,9 @@ router.post('/login', koaBody, async ctx => {
 		if(authResult === false) {
 			return await ctx.render('login', {error: 'Authentication Failed! Wrong Credentials'})
 		}
-
-		ctx.session = {authorised: true, staff: username}
-		ctx.redirect('/welcome')
+		const staffType = await staff.memberType(username)
+		const token = await jwt.sign({username: username, memberType: staffType}, 'darkSecretPrivateKey340CT')
+		ctx.body = { token }
 	}catch(error) {
 		await ctx.render('login', {error: error})
 	}

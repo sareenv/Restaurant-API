@@ -7,7 +7,7 @@ const staticDir = require('koa-static')
 const app = new Koa()
 
 const authRouter = require('./routes/auth')
-const authViewRouter = require('./routes/auth-view')
+
 
 const defaultPort = 8888
 const port = process.env.PORT || defaultPort
@@ -19,6 +19,4 @@ app.use(views(`${__dirname}/views`, { extension: 'handlebars' }, {map: { handleb
 app.use(staticDir('public'))
 
 app.use(authRouter.routes())
-app.use(authViewRouter.routes())
-
 app.listen(port)
