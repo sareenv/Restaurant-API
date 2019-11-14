@@ -6,7 +6,7 @@ const staticDir = require('koa-static')
 
 const app = new Koa()
 const orderRouter = require('../routes/order')
-const orderViewRouter = require('../routes/order-views')
+
 
 const defaultPort = 8989
 const port = process.env.PORT || defaultPort
@@ -19,6 +19,4 @@ app.use(views(`${__dirname}/../views`, { extension: 'handlebars' }, {map: { hand
 app.use(staticDir('public'))
 
 app.use(orderRouter.routes())
-app.use(orderViewRouter.routes())
-
 app.listen(port)

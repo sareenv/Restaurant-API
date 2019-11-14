@@ -6,33 +6,41 @@ const router = new Router()
 
 const Order = require('../modules/order')
 const ordersDb = require('../databases/orderdb')
-const badRequestHttpCode = 400
 
-router.post('/order', koaBody, async ctx => {
+const badRequestHttpCode = 400
+const okHttpCode = 200
+
+const checkwaitingStaffMiddleware = require('../middleware/waitingStaff')
+const checkKitchenStaffMiddleware = require('../middleware/kitchenStaff')
+
+router.post('/order', koaBody, checkwaitingStaffMiddleware, async ctx => {
 	const {tablenumber, orderedItems} = ctx.request.body
 	const order = new Order(ordersDb.database)
 	try{
 		const orderResult = await order.orderRegistration(tablenumber, orderedItems)
 		if(orderResult.orderRegistered === true) {
-			return ctx.body = orderResult
+			ctx.status = okHttpCode
+			return ctx.body = {message: 'Order is register successfully', error: false}
 		}
-		return ctx.body = 'Sorry the order was not registered'
+		ctx.status = badRequestHttpCode
+		return ctx.body = {error: true, message: 'Cannot make this order'}
 	}catch(error) {
-		ctx.throw(badRequestHttpCode, 'Failed to save this operation')
+		ctx.status = okHttpCode
+		ctx.body = {error: true, message: error}
 	}
 })
 
-router.post('/pendingOrders', async ctx => {
+router.post('/pendingOrders', checkKitchenStaffMiddleware, async ctx => {
 	try{
 		const order = new Order(ordersDb.database)
 		const orders = await order.pendingOrders('Kitchen Staff Member')
-		ctx.body = {pendingOrders: orders}
+		ctx.body = {pendingOrders: orders, error: false}
 	}catch(error) {
-		ctx.throw(badRequestHttpCode, {error: error})
+		ctx.body = {error: true, message: error}
 	}
 })
 
-router.post('/orderCollection', koaBody, async ctx => {
+router.post('/orderCollection', koaBody, checkKitchenStaffMiddleware, async ctx => {
 	const orderId = ctx.request.body.orderId
 	const accessType = 'Kitchen Staff Member'
 	const order = new Order(ordersDb.database)
