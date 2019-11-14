@@ -29,14 +29,15 @@ router.post('/login', bodyParser(), async ctx => {
 	try{
 		const authResult = await staff.login(username, password)
 		if(authResult === false) {
-			return ctx.throw(unauthorisedStatusCode, {error: 'Details are not found in our system'})
+			ctx.response.status = unauthorisedStatusCode
+			return ctx.body = {error: true, message: 'Wrong Credientials'}
 		}
-		const staffType = await staff.memberType(username)
+		const staffType = 'Waiting Staff Member'
 		const token = await jwt.sign({username: username, memberType: staffType}, 'darkSecretPrivateKey340CT')
-		ctx.body = { token }
+		ctx.body = { error: false, token: token }
 	}catch(error) {
-		console.log(error)
-		ctx.throw(unauthorisedStatusCode, {error: error})
+		ctx.response.status = badRequestStatusCode
+		ctx.body = {error: true, message: error.message}
 	}
 })
 
