@@ -13,23 +13,22 @@ router.post('/order', koaBody, async ctx => {
 	const order = new Order(ordersDb.database)
 	try{
 		const orderResult = await order.orderRegistration(tablenumber, orderedItems)
-		if(orderResult === true) {
-			return ctx.redirect('/neworder')
+		if(orderResult.orderRegistered === true) {
+			return ctx.body = orderResult
 		}
 		return ctx.body = 'Sorry the order was not registered'
 	}catch(error) {
-		console.log(error)
 		ctx.throw(badRequestHttpCode, 'Failed to save this operation')
 	}
 })
 
-router.get('/pendingOrders', async ctx => {
-	const order = new Order(ordersDb.database)
+router.post('/pendingOrders', async ctx => {
 	try{
-		const pendingOders = await order.pendingOrders('Kitchen Staff Member')
-		await ctx.render('pendingOrders', {pendingOrders: pendingOders})
+		const order = new Order(ordersDb.database)
+		const orders = await order.pendingOrders('Kitchen Staff Member')
+		ctx.body = {pendingOrders: orders}
 	}catch(error) {
-		await ctx.render('error', {error: 'Cannot Access this resource'})
+		ctx.throw(badRequestHttpCode, {error: error})
 	}
 })
 

@@ -12,8 +12,8 @@ class Order {
 		if(isNaN(parseInt(tablenumber))) throw new Error('Invalid table number')
 		try {
 			const details = {tablenumber: tablenumber, orderedItems: orderedItems, pending: true}
-			await this.collection.insertOne(details)
-			return true
+			const newOrder = await this.collection.insertOne(details)
+			return {orderRegistered: true, orderId: newOrder._id}
 		}catch(error) {
 			throw error
 		}
