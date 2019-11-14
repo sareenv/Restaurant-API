@@ -7,16 +7,19 @@ const router = new Router()
 
 const Staff = require('../modules/staff')
 const store = require('../modules/store')
+
 const unauthorisedStatusCode = 401
+const badRequestStatusCode = 400
 
 router.post('/register', bodyParser(), async ctx => {
 	const {username, password, name, memberType} = ctx.request.body
 	const staff = new Staff(store.database)
 	try{
 		await staff.registration(username, password, name, memberType)
-		return ctx.body = true
+		return ctx.body = {registerationStatus: true, message: 'The user is saved in our system', error: false}
 	}catch(error) {
-		await ctx.render('register', {error: error})
+		ctx.response.status = badRequestStatusCode
+		ctx.body = {error: true, message: error.message}
 	}
 })
 
