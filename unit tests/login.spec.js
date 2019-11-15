@@ -1,6 +1,8 @@
 'use strict'
 
 jest.mock('../__mocks__/bcrypt-promise')
+jest.setTimeout(30000)
+
 const {MongoClient} = require('mongodb')
 const Staff = require('../modules/staff')
 
@@ -18,6 +20,7 @@ describe('check registration details', () => {
 	})
 
 	afterAll(async() => {
+		await db.collection('Staff').deleteMany({}).exec()
 		await connection.close()
 		await db.close()
 	})

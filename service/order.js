@@ -6,7 +6,7 @@ const staticDir = require('koa-static')
 
 const app = new Koa()
 const orderRouter = require('../routes/order')
-const orderViewRouter = require('../routes/order-views')
+
 
 <<<<<<< HEAD:service/order.js
 const defaultPort = 8989
@@ -27,9 +27,12 @@ app.use(staticDir('public'))
 
 <<<<<<< HEAD:service/order.js
 app.use(orderRouter.routes())
+<<<<<<< HEAD
 app.use(orderViewRouter.routes())
 
 =======
 app.use(authRouter.routes())
 >>>>>>> feature/authentication:index.js
+=======
+>>>>>>> feature/order
 app.listen(port)

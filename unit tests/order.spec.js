@@ -1,6 +1,8 @@
 
 'use strict'
 
+jest.setTimeout(30000)
+
 const {MongoClient} = require('mongodb')
 const Order = require('../modules/order')
 
@@ -18,13 +20,16 @@ describe('new orders', () => {
 	})
 
 	afterAll(async() => {
+		await db.collection('Menu').deleteMany({}).exec()
 		await connection.close()
 		await db.close()
 	})
 
-	test('order registration', async() => {
+	test('order registration', async done => {
+		expect.assertions(1)
 		const order = new Order(db)
 		await expect(order.orderRegistration(14, 'Chikken Tikka')).toBeTruthy()
+		done()
 	})
 
 	test('missing table number', async done => {
@@ -49,37 +54,3 @@ describe('new orders', () => {
 	})
 })
 
-describe('pending orders', () => {
-	let connection
-	let db
-
-	beforeAll(async() => {
-		connection = await MongoClient.connect(global.__MONGO_URI__, {
-			useUnifiedTopology: true,
-		})
-		db = await connection.db(global.__MONGO_DB_NAME__)
-		const mockOrders = [ {pending: true, id: 1234, orderedItem: 'Fish'} ]
-		await db.collection('Orders').insertMany(mockOrders)
-	})
-
-	afterAll(async() => {
-		await connection.close()
-		await db.close()
-	})
-
-	test('invalid memberType', async done => {
-		expect.assertions(1)
-		const order = new Order(db)
-		await expect(order.pendingOrders('Staff')).rejects.toThrow(Error('only kitchen member can see pending orders'))
-		done()
-	})
-
-	test('Invalid Authority', async done => {
-		expect.assertions(1)
-		const order = new Order(db)
-		const operation = order.collectionReadyOrders(123, 'Waiting Staff')
-		await expect(operation).rejects.toThrow(Error('Only, Kitch staff can call for collection'))
-		done()
-	})
-
-})

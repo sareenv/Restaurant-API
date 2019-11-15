@@ -1,13 +1,27 @@
 
 'use strict'
+const jwt = require('jsonwebtoken')
+const unauthorisedStatusCode = 401
 
-function checkWaitingStaff(ctx, next) {
-	if(ctx.session.memberType !== 'Waiting Staff Member') {
-		const unauthorizedCode = 401
-		ctx.response.status = unauthorizedCode
-		return ctx.render('error', {error: 'Only Waiting Staff can access this resource'})
+async function checkWaitingStaff(ctx, next) {
+	const authHeader = ctx.headers.authorization
+	const authMessage = 'Authorisation Header not found, Cannot verify you'
+	if(authHeader === undefined) {
+		ctx.status = unauthorisedStatusCode
+		return ctx.body = {error: true, message: authMessage}
 	}
-	return next()
+	const jwtToken = authHeader
+	try{
+		const verify = await jwt.verify(jwtToken, 'darkSecretPrivateKey340CT')
+		const memberType = verify.memberType
+		if(memberType !== 'Waiting Staff Member') {
+			ctx.status = unauthorisedStatusCode
+			return ctx.body = {error: true, message: 'only waiting staff can access this resource'}
+		}
+		return next()
+	}catch(error) {
+		return ctx.body = {error: true, message: 'Cannot verify json web token it might be malformed'}
+	}
 }
 
 module.exports = checkWaitingStaff
