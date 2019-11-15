@@ -32,7 +32,7 @@ router.post('/login', bodyParser(), async ctx => {
 			ctx.response.status = unauthorisedStatusCode
 			return ctx.body = {error: true, message: 'Wrong Credientials'}
 		}
-		const staffType = 'Kitchen Staff Member'
+		const staffType = await staff.checkStaffStatus(username)
 		const token = await jwt.sign({username: username, memberType: staffType}, 'darkSecretPrivateKey340CT')
 		ctx.body = { error: false, token: token }
 	}catch(error) {

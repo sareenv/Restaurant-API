@@ -11,13 +11,17 @@ async function checkWaitingStaff(ctx, next) {
 		return ctx.body = {error: true, message: authMessage}
 	}
 	const jwtToken = authHeader
-	const verify = await jwt.verify(jwtToken, 'darkSecretPrivateKey340CT')
-	const memberType = verify.memberType
-	if(memberType !== 'Waiting Staff Member') {
-		ctx.status = unauthorisedStatusCode
-		return ctx.body = {error: true, message: 'only waiting staff can access this resource'}
+	try{
+		const verify = await jwt.verify(jwtToken, 'darkSecretPrivateKey340CT')
+		const memberType = verify.memberType
+		if(memberType !== 'Waiting Staff Member') {
+			ctx.status = unauthorisedStatusCode
+			return ctx.body = {error: true, message: 'only waiting staff can access this resource'}
+		}
+		return next()
+	}catch(error) {
+		return ctx.body = {error: true, message: 'Cannot verify json web token it might be malformed'}
 	}
-	return next()
 }
 
 module.exports = checkWaitingStaff

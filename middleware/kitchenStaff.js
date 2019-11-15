@@ -13,7 +13,6 @@ async function checkKitchenStaff(ctx, next) {
 	const jwtToken = authHeader
 	const verify = await jwt.verify(jwtToken, 'darkSecretPrivateKey340CT')
 	const memberType = verify.memberType
-	console.log(verify)
 	if(memberType !== 'Kitchen Staff Member') {
 		ctx.status = unauthorisedStatusCode
 		return ctx.body = {error: true, message: 'Only kitchen staff can access this resource'}

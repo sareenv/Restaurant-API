@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.33% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>28/30</span>
+        <span class='fraction'>30/36</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">76% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>17/17</span>
+        <span class='fraction'>19/25</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>22/24</span>
+        <span class='fraction'>24/28</span>
       </div>
     </div>
     <p class="quiet">
@@ -92,8 +92,12 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -107,6 +111,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -116,10 +129,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,18 +137,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable complexity */
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
 'use strict'
 &nbsp;
 const bcrypt = require('bcrypt-promise')
@@ -152,45 +161,51 @@ class Staff {
 		this.collection = this.database.collection('Staff')
 	}
 &nbsp;
+	async missingDetails(username, password, name) {
+		if(username === undefined || password === undefined || name === undefined) {
+			return true
+		}
+		return false
+	}
+&nbsp;
+&nbsp;
 	async registration(username, password, name, memberType) {
 		const memberTypes = ['Waiting Staff Member', 'Kitchen Staff Member']
-		if(username === undefined || password === undefined || name === undefined) throw Error('missing details')
+		const missingDetails = await this.missingDetails(username, password, name)
+		if(missingDetails === true) throw Error('missing details')
 		if(password.length &lt; minPasswordLength) throw Error('Password is short')
 		if(memberTypes.indexOf(memberType) === -1) throw Error('Invalid member type')
-		const existingUser = await this.collection.findOne({username})
+		const existingUser = await this.collection.findOne({username: username})
 		if(existingUser !== null) throw Error('username already exist')
-		try{
-			const hashedPassword = await bcrypt.hash(password, hashRounds)
-			await this.collection.insertOne({username, hashedPassword, name, memberType})
-			return true
-		}catch(error) {
-<span class="cstat-no" title="statement not covered" >			throw Error()</span>
-		}
+		const hashedPassword = await bcrypt.hash(password, hashRounds)
+		await this.collection.insertOne({username, hashedPassword, name, memberType})
+		return true
 	}
 &nbsp;
 	async login(username, password) {
 		if(username === undefined || password === undefined) throw Error('Missing details')
 		const user = await this.collection.findOne({username})
 		if(user === null) throw Error('No user found')
-		try{
-			const result = await bcrypt.compare(password, user.hashedPassword)
-			return result
-		}catch(error) {
-<span class="cstat-no" title="statement not covered" >			throw Error(error)</span>
-		}
+		const result = await bcrypt.compare(password, user.hashedPassword)
+		return result
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	as</span>ync checkStaffStatus(username) {
+<span class="cstat-no" title="statement not covered" >		if(username.length === 0 || username.length === undefined) <span class="cstat-no" title="statement not covered" >throw new Error('missing username')</span></span>
+		const member = <span class="cstat-no" title="statement not covered" >await this.collection.findOne({username})</span>
+<span class="cstat-no" title="statement not covered" >		if (member === null) <span class="cstat-no" title="statement not covered" >throw new Error('No staff member')</span></span>
+<span class="cstat-no" title="statement not covered" >		return member.memberType</span>
 	}
 }
 &nbsp;
 module.exports = Staff
-&nbsp;
-&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Nov 12 2019 22:39:10 GMT+0000 (Greenwich Mean Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 15 2019 22:10:53 GMT+0000 (Greenwich Mean Time)
 </div>
 </div>
 <script src="prettify.js"></script>

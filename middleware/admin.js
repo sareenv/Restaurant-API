@@ -2,7 +2,6 @@
 'use strict'
 
 function checkAdminAccount(ctx, next) {
-	console.log(ctx.session.adminAccess)
 	if(ctx.session.adminAccess !== true) {
 		const unauthorizedCode = 401
 		ctx.response.status = unauthorizedCode

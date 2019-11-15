@@ -51,7 +51,6 @@ router.post('/orderCollection', koaBody, checkKitchenStaffMiddleware, async ctx 
 		}
 		return ctx.redirect('error', {error: 'Order collection call failed'})
 	}catch(error) {
-		console.log(error)
 		return ctx.redirect('error', {error: error})
 	}
 })
