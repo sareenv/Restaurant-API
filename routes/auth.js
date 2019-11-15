@@ -9,15 +9,17 @@ const Staff = require('../modules/staff')
 const authDb = require('../databases/authDb')
 
 const unauthorisedStatusCode = 401
+const badRequestStatusCode = 400
 
 router.post('/register', bodyParser(), async ctx => {
 	const {username, password, name, memberType} = ctx.request.body
 	const staff = new Staff(authDb.database)
 	try{
 		await staff.registration(username, password, name, memberType)
-		return ctx.body = true
+		return ctx.body = {registerationStatus: true, message: 'The user is saved in our system', error: false}
 	}catch(error) {
-		await ctx.render('register', {error: error})
+		ctx.response.status = badRequestStatusCode
+		ctx.body = {error: true, message: error.message}
 	}
 })
 
@@ -27,14 +29,15 @@ router.post('/login', bodyParser(), async ctx => {
 	try{
 		const authResult = await staff.login(username, password)
 		if(authResult === false) {
-			return ctx.throw(unauthorisedStatusCode, {error: 'Details are not found in our system'})
+			ctx.response.status = unauthorisedStatusCode
+			return ctx.body = {error: true, message: 'Wrong Credientials'}
 		}
-		const staffType = await staff.memberType(username)
+		const staffType = 'Waiting Staff Member'
 		const token = await jwt.sign({username: username, memberType: staffType}, 'darkSecretPrivateKey340CT')
-		ctx.body = { token }
+		ctx.body = { error: false, token: token }
 	}catch(error) {
-		console.log(error)
-		ctx.throw(unauthorisedStatusCode, {error: error})
+		ctx.response.status = badRequestStatusCode
+		ctx.body = {error: true, message: error.message}
 	}
 })
 
