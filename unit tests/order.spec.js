@@ -22,9 +22,11 @@ describe('new orders', () => {
 		await db.close()
 	})
 
-	test('order registration', async() => {
+	test('order registration', async done => {
+		expect.assertions(1)
 		const order = new Order(db)
 		await expect(order.orderRegistration(14, 'Chikken Tikka')).toBeTruthy()
+		done()
 	})
 
 	test('missing table number', async done => {
