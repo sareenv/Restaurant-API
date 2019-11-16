@@ -18,6 +18,13 @@ class Staff {
 		return false
 	}
 
+	async missingDetails(username, password, name) {
+		if(username === undefined || password === undefined || name === undefined) {
+			return true
+		}
+		return false
+	}
+
 
 	async registration(username, password, name, memberType) {
 		const memberTypes = ['Waiting Staff Member', 'Kitchen Staff Member']
@@ -40,20 +47,20 @@ class Staff {
 		return result
 	}
 
+	async getStaffInformation(username) {
+		if(username === undefined || username === '') throw Error('missing username')
+		const staff = await this.collection.findOne({username: username})
+		if(staff === null) throw Error('No staff found in system with this details')
+		const details = {username: staff.username, name: staff.name, memberType: staff.memberType}
+		return details
+	}
+
 	async checkStaffStatus(username) {
-		if(username.length === 0 || username.length === undefined) throw new Error('missing username')
+		if(username.length <= 0 || username.length === undefined) throw new Error('missing username')
 		const member = await this.collection.findOne({username})
 		if (member === null) throw new Error('No staff member')
 		return member.memberType
 	}
-
-	async checkStaffStatus(username) {
-		if(username.length === 0 || username.length === undefined) throw new Error('missing username')
-		const member = await this.collection.findOne({username})
-		if (member === null) throw new Error('No staff member')
-		return member.memberType
-	}
-
 }
 
 module.exports = Staff

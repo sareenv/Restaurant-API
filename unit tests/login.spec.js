@@ -6,7 +6,7 @@ jest.setTimeout(30000)
 const {MongoClient} = require('mongodb')
 const Staff = require('../modules/staff')
 
-describe('check registration details', () => {
+describe('registeration', () => {
 	let connection
 	let db
 
@@ -15,6 +15,9 @@ describe('check registration details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
+	})
+
+	beforeEach(async() => {
 		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
 		await db.collection('Staff').insertOne(details)
 	})
