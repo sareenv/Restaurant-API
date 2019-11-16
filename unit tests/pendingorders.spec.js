@@ -10,18 +10,24 @@ describe('pending orders', () => {
 	let connection
 	let db
 
-
 	beforeAll(async() => {
 		connection = await MongoClient.connect(global.__MONGO_URI__, {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
+		await db.collection('Orders').deleteMany({})
+		const mockOrders = [ {pending: true, _id: 1234, orderedItem: 'Fish'} ]
+		await db.collection('Orders').insertMany(mockOrders)
+	})
+
+	beforeEach(async() => {
+		await db.collection('Orders').deleteMany({})
 		const mockOrders = [ {pending: true, _id: 1234, orderedItem: 'Fish'} ]
 		await db.collection('Orders').insertMany(mockOrders)
 	})
 
 	afterAll(async() => {
-		await db.collection('Orders').deleteMany({}).exec()
+		await db.collection('Orders').drop().exec()
 		await connection.close()
 		await db.close()
 	})
