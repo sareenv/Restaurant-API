@@ -16,12 +16,10 @@ describe('check registration details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
-		await db.collection('Staff').insertOne(d)
 	})
 
 	afterAll(async() => {
-		await db.collection('Staff').deleteMany({}).exec()
+		await db.collection('Staff').deleteMany({})
 		await connection.close()
 		await db.close()
 	})
@@ -71,6 +69,8 @@ describe('check registration details', () => {
 	test('existing username', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
+		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(d)
 		const operation = staff.registration('josh', 'BXWT3979-db', 'Vinney', 'Kitchen Staff Member')
 		await expect(operation).rejects.toThrow(Error('username already exist'))
 		done()

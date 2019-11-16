@@ -15,19 +15,10 @@ describe('pending orders', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		await db.collection('Orders').deleteMany({})
-		const mockOrders = [ {pending: true, _id: 1234, orderedItem: 'Fish'} ]
-		await db.collection('Orders').insertMany(mockOrders)
-	})
-
-	beforeEach(async() => {
-		await db.collection('Orders').deleteMany({})
-		const mockOrders = [ {pending: true, _id: 1234, orderedItem: 'Fish'} ]
-		await db.collection('Orders').insertMany(mockOrders)
 	})
 
 	afterAll(async() => {
-		await db.collection('Orders').drop().exec()
+		await db.collection('Orders').deleteMany({})
 		await connection.close()
 		await db.close()
 	})
@@ -49,6 +40,8 @@ describe('pending orders', () => {
 
 	test('pending Orders List', async done => {
 		expect.assertions(1)
+		const mockOrder = {pending: true, _id: 1234, orderedItem: 'Fish'}
+		await db.collection('Orders').insert(mockOrder)
 		const order = new Order(db)
 		const operation = order.pendingOrders('Kitchen Staff Member')
 		await expect(operation).resolves.not.toBeNull()

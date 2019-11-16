@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">89.13% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>36/42</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">80.65% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>25/31</span>
+        <span class='fraction'>41/46</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">83.33% </span>
-        <span class="quiet">Functions</span>
-        <span class='fraction'>5/6</span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>30/36</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">85.71% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.11% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>28/32</span>
+        <span class='fraction'>31/36</span>
       </div>
     </div>
     <p class="quiet">
@@ -105,17 +105,31 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,8 +162,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,8 +177,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
 'use strict'
 &nbsp;
@@ -175,6 +189,13 @@ class Staff {
 	constructor(database) {
 		this.database = database
 		this.collection = database.collection('Staff')
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	as</span>ync missingDetails(username, password, name) {
+<span class="cstat-no" title="statement not covered" >		if(username === undefined || password === undefined || name === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >			return true</span>
+		}
+<span class="cstat-no" title="statement not covered" >		return false</span>
 	}
 &nbsp;
 	async missingDetails(username, password, name) {
@@ -206,20 +227,20 @@ class Staff {
 		return result
 	}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	as</span>ync checkStaffStatus(username) {
-<span class="cstat-no" title="statement not covered" >		if(username.length === 0 || username.length === undefined) <span class="cstat-no" title="statement not covered" >throw new Error('missing username')</span></span>
-		const member = <span class="cstat-no" title="statement not covered" >await this.collection.findOne({username})</span>
-<span class="cstat-no" title="statement not covered" >		if (member === null) <span class="cstat-no" title="statement not covered" >throw new Error('No staff member')</span></span>
-<span class="cstat-no" title="statement not covered" >		return member.memberType</span>
+	async getStaffInformation(username) {
+		if(username === undefined || username === '') throw Error('missing username')
+		const staff = await this.collection.findOne({username: username})
+		<span class="missing-if-branch" title="else path not taken" >E</span>if(staff === null) throw Error('No staff found in system with this details')
+		const details = <span class="cstat-no" title="statement not covered" >{username: staff.username, name: staff.name, memberType: staff.memberType}</span>
+<span class="cstat-no" title="statement not covered" >		return details</span>
 	}
 &nbsp;
 	async checkStaffStatus(username) {
-		if(username.length === 0 || username.length === undefined) throw new Error('missing username')
+		if(username.length &lt;= 0 || username.length === undefined) throw new Error('missing username')
 		const member = await this.collection.findOne({username})
 		if (member === null) throw new Error('No staff member')
 		return member.memberType
 	}
-&nbsp;
 }
 &nbsp;
 module.exports = Staff
@@ -229,7 +250,7 @@ module.exports = Staff
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 15 2019 23:08:06 GMT+0000 (Greenwich Mean Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Nov 16 2019 17:06:14 GMT+0000 (Greenwich Mean Time)
 </div>
 </div>
 <script src="prettify.js"></script>

@@ -15,7 +15,6 @@ describe('Staff Details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		await db.collection('Staff').deleteMany({})
 		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
 		await db.collection('Staff').insertOne(details)
 	})

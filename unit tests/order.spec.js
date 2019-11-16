@@ -19,8 +19,13 @@ describe('new orders', () => {
 		await db.collection('Menu').insertMany(mockMenuItems)
 	})
 
+	beforeEach(async() => {
+		await db.collection('Menu').deleteMany({})
+		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
+		await db.collection('Menu').insertMany(mockMenuItems)
+	})
+
 	afterAll(async() => {
-		await db.collection('Menu').deleteMany({}).exec()
 		await connection.close()
 		await db.close()
 	})
