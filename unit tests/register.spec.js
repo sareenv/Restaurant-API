@@ -15,6 +15,9 @@ describe('check registration details', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
+	})
+
+	beforeEach(async() => {
 		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
 		await db.collection('Staff').insertOne(d)
 	})
@@ -24,6 +27,7 @@ describe('check registration details', () => {
 		await connection.close()
 		await db.close()
 	})
+
 
 	test('undefined username', async done => {
 		expect.assertions(1)

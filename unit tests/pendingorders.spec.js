@@ -16,12 +16,16 @@ describe('pending orders', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
+	})
+
+	beforeEach(async() => {
+		await db.collection('Orders').deleteMany({})
 		const mockOrders = [ {pending: true, _id: 1234, orderedItem: 'Fish'} ]
 		await db.collection('Orders').insertMany(mockOrders)
 	})
 
 	afterAll(async() => {
-		await db.collection('Orders').drop()
+		await db.collection('Orders').drop().exec()
 		await connection.close()
 		await db.close()
 	})
