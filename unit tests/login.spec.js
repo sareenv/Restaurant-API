@@ -17,13 +17,8 @@ describe('registeration', () => {
 		db = await connection.db(global.__MONGO_DB_NAME__)
 	})
 
-	beforeEach(async() => {
-		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
-		await db.collection('Staff').insertOne(details)
-	})
-
 	afterAll(async() => {
-		await db.collection('Staff').deleteMany({}).exec()
+		await db.collection('Staff').deleteMany({})
 		await connection.close()
 		await db.close()
 	})
@@ -39,6 +34,8 @@ describe('registeration', () => {
 	test('no user found', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
+		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(details)
 		const operation = staff.login('vinayak', 'bxbhsxwt3-fb')
 		await expect(operation).rejects.toThrow(Error('No user found'))
 		done()
@@ -55,6 +52,8 @@ describe('registeration', () => {
 	test('password not matched', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
+		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(details)
 		const operation = staff.login('josh', 'sample-db')
 		await expect(operation).resolves.toBe(false)
 		done()

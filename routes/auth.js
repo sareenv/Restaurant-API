@@ -41,4 +41,15 @@ router.post('/login', bodyParser(), async ctx => {
 	}
 })
 
+router.get('/getStaffInformation', async ctx => {
+	const username = ctx.query.username
+	const staff = new Staff(authDb.database)
+	try{
+		const information = await staff.getStaffInformation(username)
+		ctx.body = { error: false, info: information }
+	}catch(error) {
+		ctx.body = {error: true, message: error.message}
+	}
+})
+
 module.exports = router

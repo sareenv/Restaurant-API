@@ -9,5 +9,4 @@ const defaultPort = 8888
 const port = process.env.PORT || defaultPort
 
 app.use(authRouter.routes())
-
 app.listen(port)

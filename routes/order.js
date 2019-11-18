@@ -1,7 +1,8 @@
 'use strict'
 
 const Router = require('koa-router')
-const koaBody = require('koa-body')({multipart: true, uploadDir: '.'})
+const bodyParser = require('koa-bodyparser')
+const ObjectID = require('mongodb').ObjectID
 const router = new Router()
 
 const Order = require('../modules/order')
@@ -13,7 +14,7 @@ const okHttpCode = 200
 const checkwaitingStaffMiddleware = require('../middleware/waitingStaff')
 const checkKitchenStaffMiddleware = require('../middleware/kitchenStaff')
 
-router.post('/order', koaBody, checkwaitingStaffMiddleware, async ctx => {
+router.post('/order', bodyParser(), checkwaitingStaffMiddleware, async ctx => {
 	const {tablenumber, orderedItems} = ctx.request.body
 	const order = new Order(ordersDb.database)
 	try{
@@ -30,7 +31,7 @@ router.post('/order', koaBody, checkwaitingStaffMiddleware, async ctx => {
 	}
 })
 
-router.post('/pendingOrders', checkKitchenStaffMiddleware, async ctx => {
+router.post('/pendingOrders', bodyParser(), checkKitchenStaffMiddleware, async ctx => {
 	try{
 		const order = new Order(ordersDb.database)
 		const orders = await order.pendingOrders('Kitchen Staff Member')
@@ -40,19 +41,25 @@ router.post('/pendingOrders', checkKitchenStaffMiddleware, async ctx => {
 	}
 })
 
-router.post('/orderCollection', koaBody, checkKitchenStaffMiddleware, async ctx => {
-	const orderId = ctx.request.body.orderId
+router.post('/orderCollection', bodyParser(), checkKitchenStaffMiddleware, async ctx => {
+	const orderId = ObjectID(ctx.request.body.orderId)
 	const accessType = 'Kitchen Staff Member'
 	const order = new Order(ordersDb.database)
 	try{
 		const result = await order.collectionReadyOrders(orderId, accessType)
 		if(result === true) {
-			return ctx.redirect('/pendingOrders')
+			return ctx.body = {error: false, message: 'order collection has been called'}
 		}
-		return ctx.redirect('error', {error: 'Order collection call failed'})
+		return ctx.body = {error: true, message: 'order collection call is failed'}
 	}catch(error) {
-		return ctx.redirect('error', {error: error})
+		return {error: true, message: error.message}
 	}
+})
+
+router.get('/readyOrders', async ctx => {
+	const order = new Order(ordersDb.database)
+	const readyOrders = await order.readyOrders()
+	ctx.body = readyOrders
 })
 
 module.exports = router

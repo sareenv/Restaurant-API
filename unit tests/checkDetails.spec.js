@@ -12,12 +12,9 @@ describe('check member status', () => {
 			useUnifiedTopology: true,
 		})
 		db = await connection.db(global.__MONGO_DB_NAME__)
-		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
-		await db.collection('Staff').insertOne(d)
 	})
 
 	afterAll(async() => {
-		await db.collection('Staff').deleteMany({}).exec()
 		await connection.close()
 		await db.close()
 	})
@@ -30,6 +27,8 @@ describe('check member status', () => {
 	test('no username', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
+		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(d)
 		await expect(staff.checkStaffStatus('josha')).rejects.toThrow(Error('No staff member'))
 		done()
 	})
@@ -37,7 +36,10 @@ describe('check member status', () => {
 	test('correct details', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
+		const d = {username: 'josh', hashedPassword: 'BXW456-db125', name: 'vinney', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(d)
 		await expect(staff.checkStaffStatus('josh')).resolves.toEqual('Waiting Staff Member')
+		await db.collection('Staff').deleteMany({})
 		done()
 	})
 })

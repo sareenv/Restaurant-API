@@ -3,7 +3,7 @@
 class Order {
 	constructor(database) {
 		this.database = database
-		this.collection = database.collection('Orders')
+		this.collection = this.database.collection('Orders')
 	}
 
 	async orderRegistration(tablenumber, orderedItems) {
@@ -23,14 +23,20 @@ class Order {
 	}
 
 	async collectionReadyOrders(orderId, accessType) {
-		if(accessType !== 'Kitchen Staff Member') throw new Error('Only, Kitch staff can call for collection')
+		if(accessType !== 'Kitchen Staff Member') throw new Error('Only, Kitchen staff can call for collection')
 		if(orderId === undefined || orderId.length < 1) throw new Error('Id cannot be missing or empty')
 		const order = await this.collection.findOne({_id: orderId})
-		const collection = this.collection
 		if (order !== null) {
-			await collection.findOneAndUpdate( {_id: orderId}, {$set: {pending: false}})
+			await this.collection.findOneAndUpdate( {_id: orderId}, {$set: {pending: false}})
 			return true
 		}
+		return false
+	}
+
+	async readyOrders(accessType) {
+		if(accessType !== 'Waiting Staff Member') throw new Error('Only, Waiting staff can call for collection')
+		const orders = await this.collection.find({pending: false}).toArray()
+		if(orders.length > 0) return orders 
 		return false
 	}
 }

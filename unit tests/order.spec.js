@@ -57,5 +57,33 @@ describe('new orders', () => {
 		await expect(order.orderRegistration('sam', 'Chicken Tikka')).rejects.toThrow( Error('Invalid table number') )
 		done()
 	})
+
+	test('Invalid staff Authority for ready orders', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		await expect(order.readyOrders()).rejects.toThrow(Error('Only, Waiting staff can call for collection'))
+		done()
+	})
+
+	test('no ready orders', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const details = {tablenumber: 14, orderedItems: ['Chicken'], pending: true, time: '15:18:40'}
+		await db.collection('Orders').insertOne(details)
+		await expect(order.readyOrders('Waiting Staff Member')).resolves.toBeFalsy()
+		await db.collection('Orders').deleteMany({})
+		done()
+	})
+
+	test('ready orders', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const details = {tablenumber: 14, orderedItems: ['Chicken'], pending: false, time: '15:18:40'}
+		await db.collection('Orders').insertOne(details)
+		await expect(order.readyOrders('Waiting Staff Member')).resolves.toEqual([details])
+		await db.collection('Orders').deleteMany({})
+		done()
+	})
+
 })
 
