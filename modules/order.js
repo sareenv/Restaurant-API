@@ -36,7 +36,7 @@ class Order {
 	async readyOrders(accessType) {
 		if(accessType !== 'Waiting Staff Member') throw new Error('Only, Waiting staff can call for collection')
 		const orders = await this.collection.find({pending: false}).toArray()
-		if(orders.length > 0) return orders 
+		if(orders.length > 0) return orders
 		return false
 	}
 }
