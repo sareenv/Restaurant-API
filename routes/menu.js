@@ -23,7 +23,6 @@ router.post('/addMenuListing', bodyParser(), async ctx => {
 })
 
 router.get('/fetchmenuItems', async ctx => {
-	// fetch the stuff from the modules.
 	const admin = new Admin(adminDb.database)
 	try{
 		const items = await admin.fetchMenuItems()
