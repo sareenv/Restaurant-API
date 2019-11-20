@@ -17,6 +17,10 @@ beforeAll(async() => {
 
 describe('MenuItemsOperations', () => {
 
+	beforeEach(async() => {
+		await db.collection('Menu').deleteMany({})
+	})
+
 	afterAll(async() => {
 		await connection.close()
 		await db.close()
@@ -63,12 +67,28 @@ describe('MenuItemsOperations', () => {
 		done()
 	})
 
+	test('invalid price', async done => {
+		expect.assertions(1)
+		const admin = new Admin(db)
+		const operation = admin.registerMenuItem('Fish and Chips', 0, 'Fish', [{name: 'Chicken', price: 32}])
+		await expect(operation).rejects.toThrow(Error('invalid price'))
+		done()
+	})
+
 	test('existing menu items', async done => {
 		expect.assertions(1)
 		const admin = new Admin(db)
 		await db.collection('Menu').insertOne({itemName: 'Fish and Chips', itemPrice: 32, itemDescription: 'Fish'})
 		const operation = admin.registerMenuItem('Fish and Chips', 32, 'Fish', [{name: 'Chicken', price: 32}])
 		await expect(operation).rejects.toThrow(Error('item already exist in system'))
+		done()
+	})
+
+	test('correct details', async done => {
+		expect.assertions(1)
+		const admin = new Admin(db)
+		const operation = admin.registerMenuItem('Fish and Chips', 32, 'Fish', [{name: 'Chicken', price: 32}])
+		await expect(operation).resolves.toBe(true)
 		done()
 	})
 
