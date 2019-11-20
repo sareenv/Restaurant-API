@@ -5,19 +5,20 @@ jest.mock('../__mocks__/bcrypt-promise')
 const {MongoClient} = require('mongodb')
 const Staff = require('../modules/staff')
 
+let connection
+let db
+
+beforeAll(async() => {
+	connection = await MongoClient.connect(global.__MONGO_URI__, {
+		useUnifiedTopology: true,
+	})
+	db = await connection.db(global.__MONGO_DB_NAME__)
+	const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
+	await db.collection('Staff').insertOne(details)
+})
 
 describe('Staff Details', () => {
-	let connection
-	let db
 
-	beforeAll(async() => {
-		connection = await MongoClient.connect(global.__MONGO_URI__, {
-			useUnifiedTopology: true,
-		})
-		db = await connection.db(global.__MONGO_DB_NAME__)
-		const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
-		await db.collection('Staff').insertOne(details)
-	})
 
 	afterAll(async() => {
 		await connection.close()

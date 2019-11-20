@@ -6,18 +6,19 @@ jest.setTimeout(30000)
 const {MongoClient} = require('mongodb')
 const Order = require('../modules/order')
 
-describe('new orders', () => {
-	let connection
-	let db
+let connection
+let db
 
-	beforeAll(async() => {
-		connection = await MongoClient.connect(global.__MONGO_URI__, {
-			useUnifiedTopology: true,
-		})
-		db = await connection.db(global.__MONGO_DB_NAME__)
-		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
-		await db.collection('Menu').insertMany(mockMenuItems)
+beforeAll(async() => {
+	connection = await MongoClient.connect(global.__MONGO_URI__, {
+		useUnifiedTopology: true,
 	})
+	db = await connection.db(global.__MONGO_DB_NAME__)
+	const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
+	await db.collection('Menu').insertMany(mockMenuItems)
+})
+
+describe('new orders', () => {
 
 	beforeEach(async() => {
 		await db.collection('Menu').deleteMany({})
