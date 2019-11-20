@@ -6,6 +6,7 @@ const Admin = require('../modules/admin')
 
 const adminDb = require('../databases/adminDb')
 
+const badResponseHttpCode = 400
 const router = new Router()
 
 router.post('/addMenuListing', bodyParser(), async ctx => {
@@ -16,14 +17,21 @@ router.post('/addMenuListing', bodyParser(), async ctx => {
 		await admin.registerMenuItem(itemName, price, description, ingredients)
 		return ctx.body = {error: false, message: 'Thanks the product has been saved.' }
 	}catch(error) {
+		ctx.response.status = badResponseHttpCode
 		return ctx.body = {error: true, message: error.message}
 	}
 })
 
 router.get('/fetchmenuItems', async ctx => {
 	// fetch the stuff from the modules.
-	// const admin = new Admin(adminDb.database)
-	ctx.body = {items: [{name: 'Fish and chips', price: 20}]}
+	const admin = new Admin(adminDb.database)
+	try{
+		const items = await admin.fetchMenuItems()
+		ctx.body = {erro: false, menuItems: items}
+	}catch(error) {
+		ctx.response.status = badResponseHttpCode
+		ctx.body = {error: true, message: error.message}
+	}
 })
 
 module.exports = router

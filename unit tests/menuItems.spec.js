@@ -99,5 +99,4 @@ describe('MenuItemsOperations', () => {
 		await expect(operation).resolves.toStrictEqual([])
 		done()
 	})
-
 })

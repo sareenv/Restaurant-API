@@ -34,12 +34,8 @@ class Admin {
 	}
 
 	async fetchMenuItems() {
-		try{
-			const menuItems = await this.menuCollection.find({}).toArray()
-			return menuItems
-		}catch(error) {
-			throw new Error()
-		}
+		const menuItems = await this.menuCollection.find({}).toArray()
+		return menuItems
 	}
 }
 
