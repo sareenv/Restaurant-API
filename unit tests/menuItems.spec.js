@@ -67,7 +67,7 @@ describe('MenuItemsOperations', () => {
 		done()
 	})
 
-	test('invalid price', async done => {
+	test('free price', async done => {
 		expect.assertions(1)
 		const admin = new Admin(db)
 		const operation = admin.registerMenuItem('Fish and Chips', 0, 'Fish', [{name: 'Chicken', price: 32}])
@@ -89,6 +89,14 @@ describe('MenuItemsOperations', () => {
 		const admin = new Admin(db)
 		const operation = admin.registerMenuItem('Fish and Chips', 32, 'Fish', [{name: 'Chicken', price: 32}])
 		await expect(operation).resolves.toBe(true)
+		done()
+	})
+
+	test('fetch menu Items', async done => {
+		expect.assertions(1)
+		const admin = new Admin(db)
+		const operation = admin.fetchMenuItems()
+		await expect(operation).resolves.toStrictEqual([])
 		done()
 	})
 

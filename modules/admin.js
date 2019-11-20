@@ -33,6 +33,14 @@ class Admin {
 		return true
 	}
 
+	async fetchMenuItems() {
+		try{
+			const menuItems = await this.menuCollection.find({}).toArray()
+			return menuItems
+		}catch(error) {
+			throw new Error()
+		}
+	}
 }
 
 module.exports = Admin
