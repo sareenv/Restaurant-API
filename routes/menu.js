@@ -23,13 +23,39 @@ router.post('/addMenuListing', bodyParser(), async ctx => {
 })
 
 router.get('/fetchmenuItems', async ctx => {
-	const admin = new Admin(adminDb.database)
 	try{
+		const admin = new Admin(adminDb.database)
 		const items = await admin.fetchMenuItems()
-		ctx.body = {erro: false, menuItems: items}
+		ctx.body = {error: false, menuItems: items}
 	}catch(error) {
 		ctx.response.status = badResponseHttpCode
-		ctx.body = {error: true, message: error.message}
+		return ctx.body = {error: true, message: error.message}
+	}
+})
+
+router.get('/fetchMenuItemDetails/:id', async ctx => {
+	try{
+		const admin = new Admin(adminDb.database)
+		const id = ctx.params.id
+		// make a fetch to that specific api endpoint
+		ctx.body = `Here is your details for id ${id}`
+	}catch(error) {
+		ctx.response.status = badResponseHttpCode
+		return ctx.body = {error: true, message: error.message}
+	}
+})
+
+router.put('/fetchMenuItemDetails/:id', async ctx => {
+	try{
+		const admin = new Admin(adminDb.database)
+		const id = ctx.params.id
+		// make a update to that specific api endpoint
+		// this might be that they can only update the pricing and name of
+		// the item
+		ctx.body = `Here is your details for id ${id}`
+	}catch(error) {
+		ctx.response.status = badResponseHttpCode
+		return ctx.body = {error: true, message: error.message}
 	}
 })
 
