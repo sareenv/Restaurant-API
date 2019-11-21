@@ -100,29 +100,4 @@ describe('MenuItemsOperations', () => {
 		await expect(operation).resolves.toStrictEqual([])
 		done()
 	})
-
-	test('invalid menu item fetch', async done => {
-		expect.assertions(1)
-		const admin = new Admin(db)
-		const operation = admin.fetchMenuItemDetails(undefined)
-		await expect(operation).rejects.toThrow(Error('missing item id'))
-		done()
-	})
-
-	test('invalid menu item id', async done => {
-		expect.assertions(1)
-		const admin = new Admin(db)
-		const operation = admin.fetchMenuItemDetails(undefined)
-		await expect(operation).rejects.toThrow(Error('missing item id'))
-		done()
-	})
-
-	test('missing menu item id', async done => {
-		expect.assertions(1)
-		const admin = new Admin(db)
-		const operation = admin.fetchMenuItemDetails(undefined)
-		await expect(operation).rejects.toThrow(Error('missing item id'))
-		done()
-	})
-
 })

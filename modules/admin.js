@@ -37,14 +37,6 @@ class Admin {
 		const menuItems = await this.menuCollection.find({}).toArray()
 		return menuItems
 	}
-
-	async fetchMenuItemDetails(id) {
-		if(id === undefined || id.length < 0) throw new Error('missing item id')
-		if(typeof id !== 'number') throw new Error('invalid dataType')
-		const menuIdCheck = await this.menuCollection.findOne({_id: id})
-		if(menuIdCheck === null) throw new Error('no item exist in our system')
-	}
-
 }
 
 module.exports = Admin
