@@ -1,5 +1,7 @@
 'use strict'
 
+const {checkUndefinedValues} = require('../Helpers/checker')
+
 class Admin {
 	constructor(database) {
 		this.database = database
@@ -37,6 +39,11 @@ class Admin {
 		const menuItems = await this.menuCollection.find({}).toArray()
 		return menuItems
 	}
+
+	async updateMenuItem(id, itemName, itemPrice) {
+		if(checkUndefinedValues(id, itemName, itemPrice) === false) throw new Error('missing details')
+	}
+
 }
 
 module.exports = Admin
