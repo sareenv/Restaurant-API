@@ -14,12 +14,6 @@ class Admin {
 		return true
 	}
 
-	checkPriceDetails(itemPrice) {
-		if(itemPrice <= 0) return false
-		if(typeof itemPrice !== 'number') return false
-		return true
-	}
-
 	async checkExistingMenuItem(itemName) {
 		const menuItem = await this.menuCollection.findOne({itemName})
 		if(menuItem !== null) return true
@@ -28,7 +22,7 @@ class Admin {
 
 	async registerMenuItem(itemName, itemPrice, itemDescription, ingredients) {
 		if(this.checkMissingDetails(itemName, itemDescription) === false) throw new Error('Missing details')
-		if(this.checkPriceDetails(itemPrice) === false) throw new Error('invalid price')
+		if(checkPrice(itemPrice) === false) throw new Error('invalid price')
 		const existingItem = await this.checkExistingMenuItem(itemName)
 		if (existingItem === true) throw new Error('item already exist in system')
 		await this.menuCollection.insertOne({itemName, itemPrice, itemDescription, ingredients})
@@ -46,7 +40,6 @@ class Admin {
 		const missingChecks = checkMissingValues(id, itemName)
 		if(missingChecks === true) throw new Error('missing details')
 		const checkitemPrice = checkPrice(itemPrice)
-		console.log(checkitemPrice)
 		if(checkitemPrice === false) throw new Error('Invalid Ammount')
 		const existingCheck = await this.menuCollection.findOne({_id: id})
 		if(existingCheck === null) throw new Error('Menu Item doesnot exist')

@@ -67,10 +67,10 @@ describe('MenuItemsOperations', () => {
 		done()
 	})
 
-	test('free price', async done => {
+	test('Invalid string price', async done => {
 		expect.assertions(1)
 		const admin = new Admin(db)
-		const operation = admin.registerMenuItem('Fish and Chips', 0, 'Fish', [{name: 'Chicken', price: 32}])
+		const operation = admin.registerMenuItem('Fish and Chips', 'true', 'Fish', [{name: 'Chicken', price: 32}])
 		await expect(operation).rejects.toThrow(Error('invalid price'))
 		done()
 	})

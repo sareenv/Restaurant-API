@@ -34,12 +34,11 @@ router.get('/fetchmenuItems', async ctx => {
 })
 
 router.put('/updateMenuDetails/:id', async ctx => {
-	console.log('Coming here also')
 	try{
 		const id = ctx.params.id
-		const itemName = ctx.query.itemName
-		const itemPrice = ctx.query.itemPrice
-		console.log(itemName, itemPrice)
+		const { itemName, itemPrice } = ctx.query.itemName
+		const admin = new Admin(adminDb.database)
+		await admin.updateMenuItem(id, itemName, itemPrice)
 		ctx.body = {error: false, message: `Details are added for  id ${id}`}
 	}catch(error) {
 		ctx.response.status = badResponseHttpCode

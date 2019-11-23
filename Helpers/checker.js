@@ -25,8 +25,6 @@ function isParsableDouble(value) {
 function checkPrice(value) {
 	const parseCheck = isParsableDouble(value)
 	if(parseCheck === false) return false
-	const typeCheck = checkDataType('number', parseCheck)
-	if(typeCheck === false) return false
 	return true
 }
 
