@@ -1,24 +1,41 @@
 'use strict'
 
 function checkUndefinedValues(...values) {
-	values.forEach(value => {
-		if(value === undefined) return false
-	})
-	return true
+	let i
+	for(i = 0; i< values.length; i++) {
+		if(values[i] === undefined) return true
+	}
+	return false
 }
 
 function checkMissingValues(...values) {
-	values.forEach(value => {
-		if(value.length <= 0) return false
-	})
+	let i
+	for(i = 0; i< values.length; i++) {
+		if(values[i].length <= 0) return true
+	}
+	return false
+}
+
+function isParsableDouble(value) {
+	const result = parseFloat(value)
+	if (isNaN(result)) return false
+	return result
+}
+
+function checkPrice(value) {
+	const parseCheck = isParsableDouble(value)
+	if(parseCheck === false) return false
+	const typeCheck = checkDataType('number', parseCheck)
+	if(typeCheck === false) return false
 	return true
 }
 
 function checkDataType(type, ...values) {
-	values.forEach(value => {
-		if(typeof value !== type) return false
-	})
-	return false
+	let i
+	for(i = 0; i< values.length; i++) {
+		if(typeof values[i] !== type) return false
+	}
+	return true
 }
 
-module.exports = { checkUndefinedValues, checkMissingValues, checkDataType }
+module.exports = { checkUndefinedValues, checkMissingValues, checkDataType, checkPrice }

@@ -14,6 +14,7 @@ module.exports = {
 	},
 	testPathIgnorePatterns: [
 		'/node_modules/',
+		'/Helpers/',
 		'/__tests__/fixtures/',
 	]
 }

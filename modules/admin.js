@@ -1,6 +1,6 @@
 'use strict'
 
-const {checkUndefinedValues} = require('../Helpers/checker')
+const {checkUndefinedValues, checkMissingValues, checkPrice} = require('../Helpers/checker')
 
 class Admin {
 	constructor(database) {
@@ -41,7 +41,17 @@ class Admin {
 	}
 
 	async updateMenuItem(id, itemName, itemPrice) {
-		if(checkUndefinedValues(id, itemName, itemPrice) === false) throw new Error('missing details')
+		const undefinedChecks = checkUndefinedValues(id, itemName, itemPrice)
+		if(undefinedChecks === true) throw new Error('undefined details')
+		const missingChecks = checkMissingValues(id, itemName)
+		if(missingChecks === true) throw new Error('missing details')
+		const checkitemPrice = checkPrice(itemPrice)
+		console.log(checkitemPrice)
+		if(checkitemPrice === false) throw new Error('Invalid Ammount')
+		const existingCheck = await this.menuCollection.findOne({_id: id})
+		if(existingCheck === null) throw new Error('Menu Item doesnot exist')
+		await this.menuCollection.findOneAndUpdate( {_id: id}, {$set: {itemName: itemName, itemPrice: itemPrice}})
+		return true
 	}
 
 }

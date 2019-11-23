@@ -6,17 +6,16 @@ jest.setTimeout(30000)
 const {MongoClient} = require('mongodb')
 const Admin = require('../modules/admin')
 
-let connection
-let db
-
-beforeAll(async() => {
-	connection = await MongoClient.connect(global.__MONGO_URI__, {
-		useUnifiedTopology: true,
-	})
-	db = await connection.db(global.__MONGO_DB_NAME__)
-})
-
 describe('MenuItemsOperations', () => {
+	let connection
+	let db
+
+	beforeAll(async() => {
+		connection = await MongoClient.connect(global.__MONGO_URI__, {
+			useUnifiedTopology: true,
+		})
+		db = await connection.db(global.__MONGO_DB_NAME__)
+	})
 
 	beforeEach(async() => {
 		await db.collection('Menu').deleteMany({})
