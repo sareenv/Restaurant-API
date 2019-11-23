@@ -3,6 +3,7 @@
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 const Admin = require('../modules/admin')
+const ObjectID = require('mongodb').ObjectID
 
 const adminDb = require('../databases/adminDb')
 
@@ -35,8 +36,8 @@ router.get('/fetchmenuItems', async ctx => {
 
 router.put('/updateMenuDetails/:id', async ctx => {
 	try{
-		const id = ctx.params.id
-		const { itemName, itemPrice } = ctx.query.itemName
+		const id = ObjectID(ctx.params.id)
+		const { itemName, itemPrice } = ctx.query
 		const admin = new Admin(adminDb.database)
 		await admin.updateMenuItem(id, itemName, itemPrice)
 		ctx.body = {error: false, message: `Details are added for  id ${id}`}
