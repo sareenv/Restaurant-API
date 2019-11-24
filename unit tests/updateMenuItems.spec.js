@@ -78,9 +78,9 @@ describe('menuItemupdate', () => {
 	})
 
 	test('correct details', async done => {
-		await db.collection('Menu').insertOne({_id: '3467bxwt32', itemName: 'Fish and Chips', itemPrice: 32})
 		expect.assertions(1)
 		const admin = new Admin(db)
+		await db.collection('Menu').insertOne({_id: '3467bxwt32', itemName: 'Fish and Chips', itemPrice: 32})
 		const operation = admin.updateMenuItem('3467bxwt32', 'Fish and Chips', '23')
 		await expect(operation).resolves.toBe(true)
 		done()

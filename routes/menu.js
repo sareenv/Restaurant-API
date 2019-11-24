@@ -40,7 +40,7 @@ router.put('/updateMenuDetails/:id', async ctx => {
 		const { itemName, itemPrice } = ctx.query
 		const admin = new Admin(adminDb.database)
 		await admin.updateMenuItem(id, itemName, itemPrice)
-		ctx.body = {error: false, message: `Details are added for  id ${id}`}
+		ctx.body = {error: false, message: 'Details are added for item'}
 	}catch(error) {
 		ctx.response.status = badResponseHttpCode
 		return ctx.body = {error: true, message: error.message}
