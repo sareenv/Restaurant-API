@@ -1,11 +1,13 @@
 'use strict'
 
 const {checkUndefinedValues, checkMissingValues, checkPrice} = require('../Helpers/checker')
+const bcrypt = require('bcrypt-promise')
 
 class Admin {
 	constructor(database) {
 		this.database = database
 		this.menuCollection = database.collection('Menu')
+		this.adminLoginCollection = database.collection('AdminLogin')
 	}
 
 	checkMissingDetails(itemName, itemDescription) {
@@ -45,6 +47,17 @@ class Admin {
 		if(existingCheck === null) throw new Error('Menu Item doesnot exist')
 		await this.menuCollection.findOneAndUpdate( {_id: id}, {$set: {itemName: itemName, itemPrice: itemPrice}})
 		return true
+	}
+
+	async adminLogin(username, password) {
+		const undefinedChecks = checkUndefinedValues(username, password)
+		if(undefinedChecks === true) throw new Error('undefined credentials')
+		const missingChecks = checkMissingValues(username, password)
+		if(missingChecks === true) throw new Error('missing details')
+		const admin = await this.adminLoginCollection.findOne({username: username})
+		if(admin === null) throw new Error('admin username not found')
+		const compareHash = bcrypt.compare(password, admin.password)
+		return compareHash
 	}
 
 }

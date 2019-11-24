@@ -28,12 +28,4 @@ function checkPrice(value) {
 	return true
 }
 
-function checkDataType(type, ...values) {
-	let i
-	for(i = 0; i< values.length; i++) {
-		if(typeof values[i] !== type) return false
-	}
-	return true
-}
-
-module.exports = { checkUndefinedValues, checkMissingValues, checkDataType, checkPrice }
+module.exports = { checkUndefinedValues, checkMissingValues, checkPrice }

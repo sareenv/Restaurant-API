@@ -16,7 +16,7 @@ beforeAll(async() => {
 	db = await connection.db(global.__MONGO_DB_NAME__)
 })
 
-describe('registeration', () => {
+describe('login', () => {
 
 	afterAll(async() => {
 		await db.collection('Staff').deleteMany({})
