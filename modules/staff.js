@@ -5,18 +5,13 @@ const bcrypt = require('bcrypt-promise')
 const hashRounds = 10
 const minPasswordLength = 5
 
+
 class Staff {
 	constructor(database) {
 		this.database = database
 		this.collection = database.collection('Staff')
 	}
 
-	async missingDetails(username, password, name) {
-		if(username === undefined || password === undefined || name === undefined) {
-			return true
-		}
-		return false
-	}
 
 	async missingDetails(username, password, name) {
 		if(username === undefined || password === undefined || name === undefined) {

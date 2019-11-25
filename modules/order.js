@@ -1,17 +1,22 @@
 'use strict'
 
+const {checkUndefinedValues} = require('../Helpers/checker')
+
 class Order {
 	constructor(database) {
 		this.database = database
 		this.collection = this.database.collection('Orders')
 	}
 
+
 	async orderRegistration(tablenumber, orderedItems) {
-		if (tablenumber === undefined) throw new Error('missing table number')
-		if (orderedItems === undefined) throw new Error('missing orderedItems')
+		const undefinedChecks = checkUndefinedValues(tablenumber, orderedItems)
+		if(undefinedChecks === true) throw new Error('undefined details')
 		if(isNaN(parseInt(tablenumber))) throw new Error('Invalid table number')
-		const currentTime = new Date().toLocaleTimeString()
-		const details = {tablenumber: tablenumber, orderedItems: orderedItems, pending: true, time: currentTime}
+		const date = new Date()
+		const time = date.toLocaleTimeString()
+		const curDate = date.toLocaleDateString()
+		const details = {tablenumber: tablenumber, orderedItems: orderedItems, pending: true, time: time, date: curDate}
 		const newOrder = await this.collection.insertOne(details)
 		return {orderRegistered: true, orderId: newOrder._id}
 	}

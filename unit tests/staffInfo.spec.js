@@ -13,8 +13,6 @@ beforeAll(async() => {
 		useUnifiedTopology: true,
 	})
 	db = await connection.db(global.__MONGO_DB_NAME__)
-	const details = {username: 'josh', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
-	await db.collection('Staff').insertOne(details)
 })
 
 describe('Staff Details', () => {
@@ -45,6 +43,16 @@ describe('Staff Details', () => {
 		const staff = new Staff(db)
 		const operation = staff.getStaffInformation('kira')
 		await expect(operation).rejects.toThrow(Error('No staff found in system with this details'))
+		done()
+	})
+
+	test('correct details', async done => {
+		expect.assertions(1)
+		const staff = new Staff(db)
+		const details = {username: 'john', hashedPassword: 'BX56-db125', name: 'vi', memberType: 'Waiting Staff Member'}
+		await db.collection('Staff').insertOne(details)
+		const operation = staff.getStaffInformation('john')
+		await expect(operation).resolves.toEqual({memberType: 'Waiting Staff Member', name: 'vi', username: 'john'})
 		done()
 	})
 

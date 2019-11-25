@@ -14,17 +14,9 @@ beforeAll(async() => {
 		useUnifiedTopology: true,
 	})
 	db = await connection.db(global.__MONGO_DB_NAME__)
-	const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
-	await db.collection('Menu').insertMany(mockMenuItems)
 })
 
 describe('new orders', () => {
-
-	beforeEach(async() => {
-		await db.collection('Menu').deleteMany({})
-		const mockMenuItems = [ {name: 'Chicken Tikka', price: 20}, {name: 'Fish and Chips', price: 20}]
-		await db.collection('Menu').insertMany(mockMenuItems)
-	})
 
 	afterAll(async() => {
 		await connection.close()
@@ -41,14 +33,14 @@ describe('new orders', () => {
 	test('missing table number', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		await expect(order.orderRegistration(undefined, 'Chikken Tikka')).rejects.toThrow(Error('missing table number'))
+		await expect(order.orderRegistration(undefined, 'Chikken Tikka')).rejects.toThrow(Error('undefined details'))
 		done()
 	})
 
 	test('missing order items', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		await expect(order.orderRegistration(14, undefined)).rejects.toThrow(Error('missing orderedItems'))
+		await expect(order.orderRegistration(14, undefined)).rejects.toThrow(Error('undefined details'))
 		done()
 	})
 
@@ -66,11 +58,10 @@ describe('new orders', () => {
 		done()
 	})
 
+
 	test('no ready orders', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		const details = {tablenumber: 14, orderedItems: ['Chicken'], pending: true, time: '15:18:40'}
-		await db.collection('Orders').insertOne(details)
 		await expect(order.readyOrders('Waiting Staff Member')).resolves.toBeFalsy()
 		await db.collection('Orders').deleteMany({})
 		done()
