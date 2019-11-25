@@ -1,7 +1,6 @@
 'use strict'
 
 const Koa = require('koa')
-const session = require('koa-session')
 
 const app = new Koa()
 const orderRouter = require('../routes/order')
