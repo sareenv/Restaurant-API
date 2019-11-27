@@ -4,7 +4,7 @@
 const bcrypt = require('bcrypt-promise')
 const hashRounds = 10
 const minPasswordLength = 5
-
+const {checkUndefinedValues, checkMissingValues} = require('../Helpers/checker')
 
 class Staff {
 	constructor(database) {
@@ -30,7 +30,8 @@ class Staff {
 		const existingUser = await this.collection.findOne({username: username})
 		if(existingUser !== null) throw Error('username already exist')
 		const hashedPassword = await bcrypt.hash(password, hashRounds)
-		await this.collection.insertOne({username, hashedPassword, name, memberType})
+		const authHistory = []
+		await this.collection.insertOne({username, hashedPassword, name, memberType, authHistory})
 		return true
 	}
 
@@ -39,7 +40,23 @@ class Staff {
 		const user = await this.collection.findOne({username})
 		if(user === null) throw Error('No user found')
 		const result = await bcrypt.compare(password, user.hashedPassword)
+		const currentTime = new Date().toLocaleTimeString()
+		const currentDate = new Date().toLocaleDateString()
+		const loginDetails = { currentTime, currentDate }
+		const authHistory = {loginDetails}
+		this.collection.findOneAndUpdate({_id: user._id}, {$push: {authHistory: authHistory}})
 		return result
+	}
+
+	async loginHistory(memberId) {
+		const undefinedChecks = checkUndefinedValues(memberId)
+		const missingChecks = checkMissingValues(memberId)
+		if(undefinedChecks === true) throw new Error('undefined member Id')
+		if(missingChecks === true) throw new Error('missing member Id')
+		const member = await this.collection.findOne({_id: memberId})
+		if(member === null) throw new Error('member cannot be verified')
+		const loginHistory = member.authHistory
+		return loginHistory
 	}
 
 	async getStaffInformation(username) {

@@ -9,6 +9,7 @@ function checkUndefinedValues(...values) {
 }
 
 function checkMissingValues(...values) {
+	if(values.includes(undefined)) return false
 	let i
 	for(i = 0; i< values.length; i++) {
 		if(values[i].length <= 0) return true

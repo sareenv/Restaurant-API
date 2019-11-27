@@ -1,9 +1,10 @@
 'use strict'
 
-jest.setTimeout(30000)
+
 const {MongoClient} = require('mongodb')
 const Staff = require('../modules/staff')
 
+jest.setTimeout(30000)
 let connection
 let db
 beforeAll(async() => {

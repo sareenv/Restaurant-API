@@ -6,7 +6,7 @@
   "scripts": {
     "linter": "node_modules/.bin/eslint .",
     "unit": "./node_modules/.bin/jest --coverage 'unit tests/'",
-    "test": "jest --coverage", 
+    "test": "jest --coverage",
     "microservices": "./start.sh"
   },
   "repository": {
