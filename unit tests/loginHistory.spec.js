@@ -44,4 +44,15 @@ describe('login History', () => {
 		done()
 	})
 
+	test('Login History', async done => {
+		expect.assertions(1)
+		const staff = new Staff(db)
+		const authHistory = {login: {currentTime: '14:05', currentDate: '04/08/19'}}
+		const details = {_id: 'klo', password: 'Bh5', authHistory: [{login: authHistory}]}
+		await db.collection('Staff').insertOne(details)
+		const operation = staff.loginHistory('klo')
+		await expect(operation).resolves.toEqual(details.authHistory)
+		done()
+	})
+
 })

@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.97% </span>
+        <span class="strong">96.72% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>50/61</span>
+        <span class='fraction'>59/61</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">79.49% </span>
+        <span class="strong">97.3% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>31/39</span>
+        <span class='fraction'>36/37</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>6/7</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">95.83% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>40/48</span>
+        <span class='fraction'>46/48</span>
       </div>
     </div>
     <p class="quiet">
@@ -127,15 +127,15 @@
 <a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,12 +175,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,7 +201,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
 'use strict'
 &nbsp;
@@ -252,13 +252,13 @@ class Staff {
 		return result
 	}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	as</span>ync loginHistory(memberId) {
-		const undefinedChecks = <span class="cstat-no" title="statement not covered" >checkUndefinedValues(memberId)</span>
-		const missingChecks = <span class="cstat-no" title="statement not covered" >checkMissingValues(memberId)</span>
-<span class="cstat-no" title="statement not covered" >		if(undefinedChecks === true) <span class="cstat-no" title="statement not covered" >throw new Error('undefined member Id')</span></span>
-<span class="cstat-no" title="statement not covered" >		if(missingChecks === true) <span class="cstat-no" title="statement not covered" >throw new Error('missing member Id')</span></span>
-		const member = <span class="cstat-no" title="statement not covered" >await this.collection.findOne({_id: memberId})</span>
-<span class="cstat-no" title="statement not covered" >		if(member === null || member === undefined) <span class="cstat-no" title="statement not covered" >throw new Error('member cannot be verified')</span></span>
+	async loginHistory(memberId) {
+		const undefinedChecks = checkUndefinedValues(memberId)
+		const missingChecks = checkMissingValues(memberId)
+		if(undefinedChecks === true) throw new Error('undefined member Id')
+		if(missingChecks === true) throw new Error('missing member Id')
+		const member = await this.collection.findOne({_id: memberId})
+		<span class="missing-if-branch" title="else path not taken" >E</span>if(member === null) throw new Error('member cannot be verified')
 		const loginHistory = <span class="cstat-no" title="statement not covered" >member.authHistory</span>
 <span class="cstat-no" title="statement not covered" >		return loginHistory</span>
 	}
@@ -286,7 +286,7 @@ module.exports = Staff
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 27 2019 18:59:07 GMT+0000 (Greenwich Mean Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Nov 27 2019 22:42:14 GMT+0000 (Greenwich Mean Time)
 </div>
 </div>
 <script src="../prettify.js"></script>

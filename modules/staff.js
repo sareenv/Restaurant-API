@@ -44,7 +44,7 @@ class Staff {
 		const currentDate = new Date().toLocaleDateString()
 		const loginDetails = { currentTime, currentDate }
 		const authHistory = {loginDetails}
-		this.collection.findOneAndUpdate({_id: user._id}, {$push: {authHistory: authHistory}})
+		this.collection.findOneAndUpdate({_id: user._id}, {$push: {login: authHistory}})
 		return result
 	}
 
