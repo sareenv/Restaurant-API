@@ -1,6 +1,15 @@
 # 7651331
 This repository contains my resturant ordering system project for 340CT Software Quality and Process Managment. 
 
+
+## Installing Dependencies
+
+```
+$ npm i -s
+$ npm i --save-dev
+```
+
+
 ## How to start Microservices.
 ```
  $ npm run microservices
