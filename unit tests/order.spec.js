@@ -116,7 +116,7 @@ describe('new orders', () => {
 		done()
 	})
 
-	test('Valid order fetch', async done => {
+	test('Valid orders fetch', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
 		const currentDate = new Date().toLocaleDateString()
