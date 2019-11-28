@@ -63,6 +63,7 @@ class Order {
 		const orders = await this.collection.find({date: date}).toArray()
 		return orders
 	}
+
 }
 
 module.exports = Order

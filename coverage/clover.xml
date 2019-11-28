@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1574924349881" clover="3.2.0">
-  <project timestamp="1574924349881" name="All files">
-    <metrics statements="158" coveredstatements="158" conditionals="113" coveredconditionals="110" methods="26" coveredmethods="26" elements="297" coveredelements="294" complexity="0" loc="158" ncloc="158" packages="2" files="4" classes="4"/>
+<coverage generated="1574962107119" clover="3.2.0">
+  <project timestamp="1574962107119" name="All files">
+    <metrics statements="162" coveredstatements="162" conditionals="117" coveredconditionals="117" methods="26" coveredmethods="26" elements="305" coveredelements="305" complexity="0" loc="162" ncloc="162" packages="2" files="4" classes="4"/>
     <package name="Helpers">
       <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
       <file name="checker.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/Helpers/checker.js">
         <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
-        <line num="5" count="31" type="stmt"/>
-        <line num="6" count="49" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="21" type="stmt"/>
-        <line num="12" count="22" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="19" type="stmt"/>
-        <line num="15" count="25" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="14" type="stmt"/>
+        <line num="5" count="38" type="stmt"/>
+        <line num="6" count="56" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="26" type="stmt"/>
+        <line num="12" count="28" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="24" type="stmt"/>
+        <line num="15" count="30" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="17" type="stmt"/>
         <line num="21" count="7" type="stmt"/>
         <line num="22" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="4" type="stmt"/>
@@ -23,7 +23,7 @@
       </file>
     </package>
     <package name="modules">
-      <metrics statements="144" coveredstatements="144" conditionals="103" coveredconditionals="100" methods="22" coveredmethods="22"/>
+      <metrics statements="148" coveredstatements="148" conditionals="107" coveredconditionals="107" methods="22" coveredmethods="22"/>
       <file name="admin.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/admin.js">
         <metrics statements="38" coveredstatements="38" conditionals="30" coveredconditionals="30" methods="7" coveredmethods="7"/>
         <line num="3" count="3" type="stmt"/>
@@ -66,10 +66,10 @@
         <line num="64" count="3" type="stmt"/>
       </file>
       <file name="order.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/order.js">
-        <metrics statements="39" coveredstatements="39" conditionals="28" coveredconditionals="26" methods="6" coveredmethods="6"/>
+        <metrics statements="43" coveredstatements="43" conditionals="32" coveredconditionals="32" methods="6" coveredmethods="6"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="7" count="18" type="stmt"/>
-        <line num="8" count="18" type="stmt"/>
+        <line num="7" count="22" type="stmt"/>
+        <line num="8" count="22" type="stmt"/>
         <line num="13" count="4" type="stmt"/>
         <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
@@ -79,10 +79,10 @@
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="26" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="4" type="stmt"/>
+        <line num="26" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="29" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
@@ -93,28 +93,32 @@
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="46" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="53" count="4" type="stmt"/>
-        <line num="54" count="4" type="stmt"/>
-        <line num="55" count="4" type="stmt"/>
-        <line num="56" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="46" count="5" type="stmt"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="48" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="4" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="59" count="4" type="stmt"/>
+        <line num="60" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
       </file>
       <file name="staff.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/staff.js">
-        <metrics statements="67" coveredstatements="67" conditionals="45" coveredconditionals="44" methods="9" coveredmethods="9"/>
+        <metrics statements="67" coveredstatements="67" conditionals="45" coveredconditionals="45" methods="9" coveredmethods="9"/>
         <line num="4" count="5" type="stmt"/>
         <line num="5" count="5" type="stmt"/>
         <line num="6" count="5" type="stmt"/>
         <line num="7" count="5" type="stmt"/>
-        <line num="11" count="28" type="stmt"/>
-        <line num="12" count="28" type="stmt"/>
+        <line num="11" count="29" type="stmt"/>
+        <line num="12" count="29" type="stmt"/>
         <line num="17" count="7" type="cond" truecount="5" falsecount="0"/>
         <line num="18" count="3" type="stmt"/>
         <line num="20" count="4" type="stmt"/>
@@ -147,35 +151,35 @@
         <line num="57" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="64" count="3" type="stmt"/>
-        <line num="65" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="66" count="2" type="stmt"/>
-        <line num="67" count="2" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
-        <line num="70" count="2" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="2" type="stmt"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
+        <line num="63" count="4" type="stmt"/>
+        <line num="64" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="69" count="3" type="stmt"/>
+        <line num="70" count="3" type="stmt"/>
+        <line num="71" count="3" type="stmt"/>
+        <line num="72" count="3" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="79" count="5" type="stmt"/>
         <line num="80" count="5" type="stmt"/>
-        <line num="81" count="5" type="stmt"/>
-        <line num="82" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="83" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="84" count="3" type="stmt"/>
-        <line num="85" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="81" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="82" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="83" count="3" type="stmt"/>
+        <line num="84" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="85" count="2" type="stmt"/>
         <line num="86" count="2" type="stmt"/>
-        <line num="87" count="2" type="stmt"/>
-        <line num="91" count="4" type="cond" truecount="4" falsecount="0"/>
-        <line num="92" count="2" type="stmt"/>
-        <line num="93" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="90" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="92" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="1" type="stmt"/>
         <line num="94" count="1" type="stmt"/>
-        <line num="95" count="1" type="stmt"/>
-        <line num="99" count="3" type="cond" truecount="4" falsecount="0"/>
-        <line num="100" count="2" type="stmt"/>
-        <line num="101" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="102" count="1" type="stmt"/>
-        <line num="106" count="5" type="stmt"/>
+        <line num="98" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="100" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="105" count="5" type="stmt"/>
       </file>
     </package>
   </project>

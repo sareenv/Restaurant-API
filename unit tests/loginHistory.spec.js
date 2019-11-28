@@ -91,7 +91,7 @@ describe('login History', () => {
 	test('Invalid logout History', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
-		const details = {username: 'vikas', password: 'Bh5', authHistory: []}
+		const details = {username: 'vikas', password: 'Bh5', authHistory: [{logoutDetails: {}}]}
 		await db.collection('Staff').insertOne(details)
 		const operation = staff.logoutDetailsUpdate('vikas')
 		await expect(operation).resolves.toEqual(false)
@@ -106,11 +106,20 @@ describe('login History', () => {
 		done()
 	})
 
+	test('pushing invalid logout Details', async done => {
+		expect.assertions(1)
+		const staff = new Staff(db)
+		const details = [{logoutDetails: undefined}]
+		const operation = staff.pushlogoutDetails({authHistory: details})
+		await expect(operation).resolves.toBe(true)
+		done()
+	})
 	test('pushing logout Details', async done => {
 		expect.assertions(1)
 		const staff = new Staff(db)
 		const authHistory = {login: {currentTime: '14:05', currentDate: '04/08/19'}}
-		const operation = staff.pushlogoutDetails({authHistory: [{loginDetails: authHistory}]})
+		const details = [{loginDetails: authHistory}, {loginDetails: authHistory}]
+		const operation = staff.pushlogoutDetails({authHistory: details})
 		await expect(operation).resolves.toBe(true)
 		done()
 	})

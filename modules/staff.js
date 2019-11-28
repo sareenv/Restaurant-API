@@ -60,8 +60,7 @@ class Staff {
 	}
 
 	async pushlogoutDetails(member) {
-		let i
-		for(i = 0; i< member.authHistory.length; i++) {
+		for(let i = 0; i< member.authHistory.length; i++) {
 			if(member.authHistory[i].logoutDetails === undefined) {
 				const logoutTime = new Date().toLocaleTimeString()
 				const logoutDate = new Date().toLocaleDateString()
