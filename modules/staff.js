@@ -40,23 +40,51 @@ class Staff {
 		const user = await this.collection.findOne({username})
 		if(user === null) throw Error('No user found')
 		const result = await bcrypt.compare(password, user.hashedPassword)
-		const currentTime = new Date().toLocaleTimeString()
-		const currentDate = new Date().toLocaleDateString()
-		const loginDetails = { currentTime, currentDate }
+		const loginTime = new Date().toLocaleTimeString()
+		const loginDate = new Date().toLocaleDateString()
+		const loginDetails = { loginTime, loginDate }
 		const authHistory = {loginDetails}
-		this.collection.findOneAndUpdate({_id: user._id}, {$push: {login: authHistory}})
+		this.collection.findOneAndUpdate({_id: user._id}, {$push: {authHistory: authHistory}})
 		return result
 	}
 
-	async loginHistory(memberId) {
-		const undefinedChecks = checkUndefinedValues(memberId)
-		const missingChecks = checkMissingValues(memberId)
+	async loginHistory(username) {
+		const undefinedChecks = checkUndefinedValues(username)
+		const missingChecks = checkMissingValues(username)
 		if(undefinedChecks === true) throw new Error('undefined member Id')
 		if(missingChecks === true) throw new Error('missing member Id')
-		const member = await this.collection.findOne({_id: memberId})
+		const member = await this.collection.findOne({username: username})
 		if(member === null) throw new Error('member cannot be verified')
 		const loginHistory = member.authHistory
 		return loginHistory
+	}
+
+	async pushlogoutDetails(member) {
+		let i
+		for(i = 0; i< member.authHistory.length; i++) {
+			if(member.authHistory[i].logoutDetails === undefined) {
+				const logoutTime = new Date().toLocaleTimeString()
+				const logoutDate = new Date().toLocaleDateString()
+				const updateValue = { logoutTime, logoutDate}
+				const value = 'authHistory.'+ `${i}`
+				const query = {}
+				query[value] = {loginDetails: member.authHistory[i].loginDetails ,logoutDetails: updateValue}
+				await this.collection.findOneAndUpdate({_id: member._id}, {$set: query})
+				return true
+			}
+		}
+		return false
+	}
+
+	async logoutDetailsUpdate(username) {
+		const undefinedChecks = checkUndefinedValues(username)
+		const missingChecks = checkMissingValues(username)
+		if(undefinedChecks === true) throw new Error('undefined member Id')
+		if(missingChecks === true) throw new Error('missing member Id')
+		const member = await this.collection.findOne({username: username})
+		if(member === null) throw new Error('member cannot be verified')
+		const logoutDetailsResult = await this.pushlogoutDetails(member)
+		return logoutDetailsResult
 	}
 
 	async getStaffInformation(username) {

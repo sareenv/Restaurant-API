@@ -52,4 +52,16 @@ router.get('/getStaffInformation', async ctx => {
 	}
 })
 
+router.post('/logout', bodyParser() ,async ctx => {
+	const username = ctx.request.body.username
+	console.log(username)
+	const staff = new Staff(authDb.database)
+	try{
+		const information = await staff.logoutDetailsUpdate(username)
+		ctx.body = { error: false, info: information }
+	}catch(error) {
+		ctx.body = {error: true, message: error.message}
+	}
+})
+
 module.exports = router
