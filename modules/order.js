@@ -1,6 +1,6 @@
 'use strict'
 
-const {checkUndefinedValues} = require('../Helpers/checker')
+const {checkUndefinedValues, checkMissingValues} = require('../Helpers/checker')
 
 class Order {
 	constructor(database) {
@@ -43,6 +43,17 @@ class Order {
 		const orders = await this.collection.find({pending: false}).toArray()
 		if(orders.length > 0) return orders
 		return false
+	}
+
+	async fetchAllOrders(accessType) {
+		const undefinedChecks = checkUndefinedValues(accessType)
+		const missingChecks = checkMissingValues(accessType)
+		const date = new Date().toLocaleDateString()
+		if(undefinedChecks === true) throw new Error('undefined accessType')
+		if(missingChecks === true) throw new Error('missing admin Id')
+		if(accessType !== 'admin') throw new Error('Only, Admin can access this resource')
+		const orders = await this.collection.find({date: date}).toArray()
+		return orders
 	}
 }
 

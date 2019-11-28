@@ -77,5 +77,40 @@ describe('new orders', () => {
 		done()
 	})
 
+	test('undefined admin Id', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.fetchAllOrders(undefined)
+		await expect(operation).rejects.toThrow(Error('undefined accessType'))
+		done()
+	})
+
+	test('missing admin Id', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.fetchAllOrders('')
+		await expect(operation).rejects.toThrow(Error('missing admin Id'))
+		done()
+	})
+
+	test('Invalid admin Id', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.fetchAllOrders('jklel')
+		await expect(operation).rejects.toThrow(Error('Only, Admin can access this resource'))
+		done()
+	})
+
+	test('Valid order fetch', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const currentDate = new Date().toLocaleDateString()
+		const details = {tablenumber: 14, orderedItems: ['Fish'], pending: false, time: '15:18:40', date: currentDate}
+		await db.collection('Orders').insertOne(details)
+		const operation = order.fetchAllOrders('admin')
+		await expect(operation).resolves.toEqual([details])
+		done()
+	})
+
 })
 
