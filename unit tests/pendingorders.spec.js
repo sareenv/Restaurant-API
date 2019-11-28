@@ -36,6 +36,22 @@ describe('pending orders', () => {
 		done()
 	})
 
+	test('Undefined Authority', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.pendingOrders(undefined)
+		await expect(operation).rejects.toThrow(Error('undefined access Type'))
+		done()
+	})
+
+	test('missing Authority', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.pendingOrders('')
+		await expect(operation).rejects.toThrow(Error('missing access Type'))
+		done()
+	})
+
 	test('Invalid Authority', async done => {
 		expect.assertions(1)
 		const order = new Order(db)

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1574922958644" clover="3.2.0">
-  <project timestamp="1574922958644" name="All files">
-    <metrics statements="154" coveredstatements="154" conditionals="109" coveredconditionals="108" methods="26" coveredmethods="26" elements="289" coveredelements="288" complexity="0" loc="154" ncloc="154" packages="2" files="4" classes="4"/>
+<coverage generated="1574924349881" clover="3.2.0">
+  <project timestamp="1574924349881" name="All files">
+    <metrics statements="158" coveredstatements="158" conditionals="113" coveredconditionals="110" methods="26" coveredmethods="26" elements="297" coveredelements="294" complexity="0" loc="158" ncloc="158" packages="2" files="4" classes="4"/>
     <package name="Helpers">
       <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
       <file name="checker.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/Helpers/checker.js">
         <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
-        <line num="5" count="29" type="stmt"/>
-        <line num="6" count="47" type="cond" truecount="2" falsecount="0"/>
-        <line num="8" count="19" type="stmt"/>
-        <line num="12" count="20" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="17" type="stmt"/>
-        <line num="15" count="23" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="12" type="stmt"/>
+        <line num="5" count="31" type="stmt"/>
+        <line num="6" count="49" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="21" type="stmt"/>
+        <line num="12" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="19" type="stmt"/>
+        <line num="15" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="14" type="stmt"/>
         <line num="21" count="7" type="stmt"/>
         <line num="22" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="23" count="4" type="stmt"/>
@@ -23,7 +23,7 @@
       </file>
     </package>
     <package name="modules">
-      <metrics statements="140" coveredstatements="140" conditionals="99" coveredconditionals="98" methods="22" coveredmethods="22"/>
+      <metrics statements="144" coveredstatements="144" conditionals="103" coveredconditionals="100" methods="22" coveredmethods="22"/>
       <file name="admin.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/admin.js">
         <metrics statements="38" coveredstatements="38" conditionals="30" coveredconditionals="30" methods="7" coveredmethods="7"/>
         <line num="3" count="3" type="stmt"/>
@@ -63,10 +63,10 @@
         <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="59" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
-        <line num="65" count="3" type="stmt"/>
+        <line num="64" count="3" type="stmt"/>
       </file>
       <file name="order.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/order.js">
-        <metrics statements="35" coveredstatements="35" conditionals="24" coveredconditionals="24" methods="6" coveredmethods="6"/>
+        <metrics statements="39" coveredstatements="39" conditionals="28" coveredconditionals="26" methods="6" coveredmethods="6"/>
         <line num="3" count="2" type="stmt"/>
         <line num="7" count="18" type="stmt"/>
         <line num="8" count="18" type="stmt"/>
@@ -79,29 +79,33 @@
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="25" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="32" count="4" type="cond" truecount="4" falsecount="0"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="42" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="49" count="4" type="stmt"/>
-        <line num="50" count="4" type="stmt"/>
-        <line num="51" count="4" type="stmt"/>
-        <line num="52" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="53" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="54" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="60" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="46" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="53" count="4" type="stmt"/>
+        <line num="54" count="4" type="stmt"/>
+        <line num="55" count="4" type="stmt"/>
+        <line num="56" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
       </file>
       <file name="staff.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/staff.js">
         <metrics statements="67" coveredstatements="67" conditionals="45" coveredconditionals="44" methods="9" coveredmethods="9"/>

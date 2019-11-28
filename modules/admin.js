@@ -59,7 +59,6 @@ class Admin {
 		const compareHash = bcrypt.compare(password, admin.password)
 		return compareHash
 	}
-
 }
 
 module.exports = Admin

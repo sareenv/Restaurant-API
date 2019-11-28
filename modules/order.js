@@ -22,6 +22,10 @@ class Order {
 	}
 
 	async pendingOrders(accessType) {
+		const undefinedChecks = checkUndefinedValues(accessType)
+		if(undefinedChecks === true) throw new Error('undefined access Type')
+		const missingChecks = checkMissingValues(accessType)
+		if(missingChecks === true) throw new Error('missing access Type')
 		if(accessType !== 'Kitchen Staff Member') throw new Error('only kitchen member can see pending orders')
 		const pendingOrders = await this.collection.find({pending: true}).toArray()
 		return pendingOrders
@@ -39,6 +43,10 @@ class Order {
 	}
 
 	async readyOrders(accessType) {
+		const undefinedChecks = checkUndefinedValues(accessType)
+		const missingChecks = checkMissingValues(accessType)
+		if(undefinedChecks === true) throw new Error('undefined accessType')
+		if(missingChecks === true) throw new Error('missing accessType')
 		if(accessType !== 'Waiting Staff Member') throw new Error('Only, Waiting staff can call for collection')
 		const orders = await this.collection.find({pending: false}).toArray()
 		if(orders.length > 0) return orders

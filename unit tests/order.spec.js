@@ -51,10 +51,25 @@ describe('new orders', () => {
 		done()
 	})
 
+	test('Undefined staff Authority for ready orders', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		const operation = order.readyOrders(undefined)
+		await expect(operation).rejects.toThrow(Error('undefined accessType'))
+		done()
+	})
+
+	test('Missing staff Authority for ready orders', async done => {
+		expect.assertions(1)
+		const order = new Order(db)
+		await expect(order.readyOrders('')).rejects.toThrow(Error('missing accessType'))
+		done()
+	})
+
 	test('Invalid staff Authority for ready orders', async done => {
 		expect.assertions(1)
 		const order = new Order(db)
-		await expect(order.readyOrders()).rejects.toThrow(Error('Only, Waiting staff can call for collection'))
+		await expect(order.readyOrders('Manager')).rejects.toThrow(Error('Only, Waiting staff can call for collection'))
 		done()
 	})
 

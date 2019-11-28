@@ -13,6 +13,7 @@ const okHttpCode = 200
 
 const checkwaitingStaffMiddleware = require('../middleware/waitingStaff')
 const checkKitchenStaffMiddleware = require('../middleware/kitchenStaff')
+const checkAdminMiddleware = require('../middleware/checkAdmin')
 
 router.post('/order', bodyParser(), checkwaitingStaffMiddleware, async ctx => {
 	const {tablenumber, orderedItems} = ctx.request.body
@@ -60,6 +61,16 @@ router.get('/readyOrders', async ctx => {
 	const order = new Order(ordersDb.database)
 	const readyOrders = await order.readyOrders()
 	ctx.body = readyOrders
+})
+
+router.get('/fetchAllOrders', checkAdminMiddleware, async ctx => {
+	const order = new Order(ordersDb.database)
+	try{
+		const orders = await order.fetchAllOrders('admin')
+		ctx.body = {error: false, orders: orders}
+	}catch(error) {
+		ctx.body = {error: true, message: error.message}
+	}
 })
 
 module.exports = router
