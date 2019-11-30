@@ -1,6 +1,7 @@
 'use strict'
 
 const {checkUndefinedValues, checkMissingValues, checkPrice} = require('../Helpers/checker')
+const fs = require('fs-extra')
 const bcrypt = require('bcrypt-promise')
 
 class Admin {
@@ -59,6 +60,20 @@ class Admin {
 		const compareHash = bcrypt.compare(password, admin.password)
 		return compareHash
 	}
+
+	async saveStats(content, fileName) {
+		const undefinedChecks = checkUndefinedValues(content, fileName)
+		if(undefinedChecks === true) throw new Error('values undefined')
+		const missingValuesChecks = checkMissingValues(content, fileName)
+		if(missingValuesChecks === true) throw new Error('missing details')
+		try {
+			await fs.writeFile(fileName, content)
+			return true
+		}catch(error) {
+			return false
+		}
+	}
+
 }
 
 module.exports = Admin
