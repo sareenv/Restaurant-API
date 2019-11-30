@@ -54,7 +54,6 @@ router.get('/getStaffInformation', async ctx => {
 
 router.post('/logout', bodyParser() ,async ctx => {
 	const username = ctx.request.body.username
-	console.log(username)
 	const staff = new Staff(authDb.database)
 	try{
 		const information = await staff.logoutDetailsUpdate(username)
