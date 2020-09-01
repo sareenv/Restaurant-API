@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient
 
 const order = {}
 
-const url = 'mongodb://vinayak:BXWT3-db@ds245018.mlab.com:45018/340ctorders'
+const url = process.env.DB_ORDER_URI
 MongoClient.connect(url, {useUnifiedTopology: true})
 	.then((client) => {
 		order.client = client

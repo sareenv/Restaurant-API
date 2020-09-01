@@ -1,10 +1,10 @@
 'use strict'
 
 const MongoClient = require('mongodb').MongoClient
-
+require('dotenv').config({path: '../.env'})
 const adminDb = {}
 
-const url = 'mongodb://vinayak:BXWT3-db@ds039078.mlab.com:39078/340ctadmin'
+const url = process.env.DB_ADMIN_URI
 
 MongoClient.connect(url, {useUnifiedTopology: true})
 	.then((client) => {

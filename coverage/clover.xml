@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1575134098122" clover="3.2.0">
-  <project timestamp="1575134098122" name="All files">
+<coverage generated="1597962299487" clover="3.2.0">
+  <project timestamp="1597962299487" name="All files">
     <metrics statements="171" coveredstatements="171" conditionals="121" coveredconditionals="121" methods="27" coveredmethods="27" elements="319" coveredelements="319" complexity="0" loc="171" ncloc="171" packages="2" files="4" classes="4"/>
     <package name="Helpers">
       <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
-      <file name="checker.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/Helpers/checker.js">
+      <file name="checker.js" path="/Users/databunker/develop/web/apis/resturantApi/Helpers/checker.js">
         <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
         <line num="5" count="44" type="stmt"/>
         <line num="6" count="67" type="cond" truecount="2" falsecount="0"/>
@@ -24,7 +24,7 @@
     </package>
     <package name="modules">
       <metrics statements="157" coveredstatements="157" conditionals="111" coveredconditionals="111" methods="23" coveredmethods="23"/>
-      <file name="admin.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/admin.js">
+      <file name="admin.js" path="/Users/databunker/develop/web/apis/resturantApi/modules/admin.js">
         <metrics statements="47" coveredstatements="47" conditionals="34" coveredconditionals="34" methods="8" coveredmethods="8"/>
         <line num="3" count="4" type="stmt"/>
         <line num="4" count="4" type="stmt"/>
@@ -74,7 +74,7 @@
         <line num="73" count="1" type="stmt"/>
         <line num="79" count="4" type="stmt"/>
       </file>
-      <file name="order.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/order.js">
+      <file name="order.js" path="/Users/databunker/develop/web/apis/resturantApi/modules/order.js">
         <metrics statements="43" coveredstatements="43" conditionals="32" coveredconditionals="32" methods="6" coveredmethods="6"/>
         <line num="3" count="2" type="stmt"/>
         <line num="7" count="22" type="stmt"/>
@@ -120,7 +120,7 @@
         <line num="64" count="1" type="stmt"/>
         <line num="69" count="2" type="stmt"/>
       </file>
-      <file name="staff.js" path="/Users/databunker/develop/Uni-3rd/SoftwareQuality/340CT-CourseWork/back-end/modules/staff.js">
+      <file name="staff.js" path="/Users/databunker/develop/web/apis/resturantApi/modules/staff.js">
         <metrics statements="67" coveredstatements="67" conditionals="45" coveredconditionals="45" methods="9" coveredmethods="9"/>
         <line num="4" count="5" type="stmt"/>
         <line num="5" count="5" type="stmt"/>
