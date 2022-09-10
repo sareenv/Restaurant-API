@@ -1,5 +1,5 @@
 # Restaurants Managment Microservice
-This repository contains resturant managment system project for 340CT Software Quality and Process Managment. 
+This repository contains resturant managment system project for 340CT Software Quality and Process Managment. The project is developed in the Node.js and follows the modern asynchronous approch rather and avoid the situation of callback hell. 
 
 # Following Concepts were used in the development of the project.
 <ol>
