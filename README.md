@@ -1,5 +1,5 @@
 # Restaurants Managment Microservice
-This repository contains my resturant ordering system project for 340CT Software Quality and Process Managment. The repo contains backend REST-Api code with unit tests written in <a href="https://jestjs.io/"> Jest Framework</a> and implements `Microservices` Architecture.
+This repository contains resturant managment system project for 340CT Software Quality and Process Managment. 
 
 # Following Concepts were used in the development of the project.
 <ol>
