@@ -1,2 +1,2 @@
-# Restaurants RestApi
+# Restaurants Managment Microservice
 This repository contains my resturant ordering system project for 340CT Software Quality and Process Managment. The repo contains backend REST-Api code with unit tests written in <a href="https://jestjs.io/"> Jest Framework</a> and implements `Microservices` Architecture. The front-end part of this system is seprated into different repository <a href="https://github.coventry.ac.uk/340CT-1920SEPJAN/sareenv-frontend"> click to visit front-end repository </a>
